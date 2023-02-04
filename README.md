@@ -1,2 +1,2 @@
 # Unity_Hero_Game
-A Third-Game bout a young hero trying to restore peace in Otaku City.
+A  Unity Third-Game about a young hero trying to restore peace in Otaku City.
