@@ -39,7 +39,7 @@ public class DangerSenseQuirk : MonoBehaviour
     private void Dodging()
     {
         cc.enabled = false;
-        DekusRealPosition.position = new Vector3(DekusRealPosition.localPosition.x, DekusRealPosition.localPosition.y + 1.5f, DekusRealPosition.localPosition.z + 0.5f);
+        DekusRealPosition.position = new Vector3(DekusRealPosition.localPosition.x, DekusRealPosition.localPosition.y + 2f, DekusRealPosition.localPosition.z + 1f);
         cc.enabled = true;
     }
 

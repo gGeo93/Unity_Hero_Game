@@ -48,7 +48,6 @@ public class PlayerAnimatingConditions : MonoBehaviour
                 isUsingFaJin = false;
                 
                 isAirFloating = false;
-                canDodgeWithDangerSense = false;
 
                 isFloating = false;
                 isIdle=true;
@@ -69,7 +68,6 @@ public class PlayerAnimatingConditions : MonoBehaviour
 
                 isSweepFalling = false;
                 isAirFloating = false;
-                canDodgeWithDangerSense = false;
 
                 isIdle = false;
                 isFloating=true;
