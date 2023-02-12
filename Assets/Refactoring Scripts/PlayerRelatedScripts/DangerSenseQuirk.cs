@@ -42,12 +42,12 @@ public class DangerSenseQuirk : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.D) && rateOfChange < 0)
         {
-            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.dangerSenseSlider, ref rateOfChange);
+            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.dangerSenseSlider, ref rateOfChange, 0.175f);
             return true;
         }
         else if(!Input.GetKey(KeyCode.D) && rateOfChange > 0)
         {
-            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.dangerSenseSlider, ref rateOfChange);
+            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.dangerSenseSlider, ref rateOfChange, -0.25f);
             return false;
         }
         else if(Input.GetKeyUp(KeyCode.D))

@@ -8,16 +8,20 @@ public class SmokeQuirk : MonoBehaviour
     OneForAllSoundEffects soundEffects;
     PlayerLocation playerLocation;
     [SerializeField] ParticleSystem smokeQuirk;
+    [SerializeField] QuirksSliders quirksSliders;
+    float rateOfQuirkRegain;
     private void Awake() 
     {
+        rateOfQuirkRegain = 0.05f;
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         playerLocation = GetComponent<PlayerLocation>();
         soundEffects = GetComponent<OneForAllSoundEffects>();    
     }
     public void SmokeQuirkActivative()
     {
-        if (!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.cannotEmmitSmoke && Input.GetKeyDown(KeyCode.S))
+        if (quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.cannotEmmitSmoke && Input.GetKeyDown(KeyCode.S))
         {
+            quirksSliders.smokeSlider.value = 0f;
             playerAnimatingConditions.isUsingSmokeQuirk = true;
             playerAnimatingConditions.cannotEmmitSmoke = true;
             soundEffects.PlayAnimSound(6);
@@ -32,8 +36,16 @@ public class SmokeQuirk : MonoBehaviour
     }
     IEnumerator CanReEmmitSmoke()
     {
-        yield return new WaitForSeconds(5f);
-        playerAnimatingConditions.cannotEmmitSmoke = false;
+        while(true)
+        {
+            quirksSliders.smokeSlider.value += rateOfQuirkRegain * Time.deltaTime;
+            yield return null;
+            if(quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue)
+            {
+                playerAnimatingConditions.cannotEmmitSmoke = false;
+                break;
+            }
+        }
     }
     IEnumerator SmokeQuirkDuration()
     {

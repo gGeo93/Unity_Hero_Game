@@ -10,16 +10,16 @@ public class QuirksSlidersFunctionality : MonoBehaviour
     {
         quirksSliders = GetComponent<QuirksSliders>();
     }
-    public void QuirkEndurance(Slider quirkSlider,ref float reductionRythm)
+    public void QuirkEndurance(Slider quirkSlider,ref float reductionRythm, float rate)
     {
         quirkSlider.value += reductionRythm * Time.deltaTime;
         if(quirkSlider.value <= quirkSlider.minValue + 0.01f)
-            reductionRythm = 0.175f;
+            reductionRythm = rate;
     }
-    public void QuirkRefill(Slider quirkSlider,ref float fillingRythm)
+    public void QuirkRefill(Slider quirkSlider,ref float fillingRythm, float rate)
     {
         quirkSlider.value += fillingRythm * Time.deltaTime;
         if(quirkSlider.value >= quirkSlider.maxValue - 0.01f)
-            fillingRythm = -0.25f;
+            fillingRythm = rate;
     }
 }

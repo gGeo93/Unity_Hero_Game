@@ -9,18 +9,21 @@ public class AirFloatQuirk : MonoBehaviour
     [SerializeField] GameObject cam1;
     [SerializeField] GameObject cam2;
     [SerializeField] GameObject cam3;
+    [SerializeField]QuirksSliders quirksSliders;
+    float rateOfChange;
     void Awake() 
     {
+        rateOfChange = -0.05f;
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         physicalConditions = GetComponent<PhysicalConditions>();    
     }
     public void UsingFloatQuirk()
     {
         if (!playerAnimatingConditions.isDead 
-        && !playerAnimatingConditions.isSweepFalling 
-        && playerAnimatingConditions.canUseOneforAll 
+        && !playerAnimatingConditions.isSweepFalling
+        &&  AirFloatQuirksState()
         && playerAnimatingConditions.canGoShiftingSpeed
-        && Input.GetKey(KeyCode.F))
+        )        
         {
             cam3.SetActive(true);
             cam1.SetActive(false);
@@ -65,5 +68,23 @@ public class AirFloatQuirk : MonoBehaviour
             physicalConditions.jumpingAcceleration = 1f;
             playerAnimatingConditions.IsIdleOrFloating();
         }
+    }
+    private bool AirFloatQuirksState()
+    {
+        if(Input.GetKey(KeyCode.F) && rateOfChange < 0)
+        {
+            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.airFloatSlider, ref rateOfChange, 0.05f);
+            return true;
+        }
+        else if(!Input.GetKey(KeyCode.F) && rateOfChange > 0)
+        {
+            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.airFloatSlider, ref rateOfChange, -0.05f);
+            return false;
+        }
+        else if(Input.GetKeyUp(KeyCode.F))
+        {
+            rateOfChange = 0.05f;
+        }
+        return false;    
     }
 }
