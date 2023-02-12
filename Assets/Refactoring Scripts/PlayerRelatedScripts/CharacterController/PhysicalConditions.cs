@@ -21,13 +21,14 @@ public class PhysicalConditions : MonoBehaviour
             {
                 beforeJumpLimit = dekusRealTransform.position.y + airLimitOffeset;
                 airLimit = beforeJumpLimit;
+                if(playerAnimatingConditions.canUseOneforAll && !Input.GetKey(KeyCode.B))
+                {
+                    airLimit = 5f;
+                }
                 canResetTheAirLimit = true;
-            }
-            else if(!playerAnimatingConditions.canUseOneforAll)
-            {
                 StartCoroutine(GetLimitAfterAwhile());
             }
-            return !playerAnimatingConditions.canUseOneforAll ? airLimit : 15;
+            return airLimit;
         } 
         set
         {
@@ -42,7 +43,10 @@ public class PhysicalConditions : MonoBehaviour
         cc = GetComponent<CharacterController>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();    
     }
-    
+    void Start() 
+    {
+        AirLimit = 1.5f;
+    }
     IEnumerator GetLimitAfterAwhile()
     {
         if(canResetTheAirLimit)

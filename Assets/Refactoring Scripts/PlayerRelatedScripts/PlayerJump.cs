@@ -11,7 +11,7 @@ public class PlayerJump : MonoBehaviour
     PlayerAnimatingConditions playerAnimatingConditions;
     ParticleForces particleForces;
     PhysicalConditions physicalConditions;
-    float rateOfChange;
+    float rateOfChange = -0.1f;
     
     void Awake() 
     {
@@ -23,7 +23,7 @@ public class PlayerJump : MonoBehaviour
     
     public void Jump()
     {
-        if(rateOfChange < 0 && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && Input.GetKey(KeyCode.Space))
+        if(!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && Input.GetKey(KeyCode.Space))
         {         
             if(playerAnimatingConditions.isPoweringUp || playerAnimatingConditions.isFingering || playerAnimatingConditions.isSmashing || playerAnimatingConditions.isKicking)
                 physicalConditions.RepairingGravity();
@@ -37,12 +37,13 @@ public class PlayerJump : MonoBehaviour
                 if(!playerAnimatingConditions.isSmashing && !playerAnimatingConditions.isKicking && !playerAnimatingConditions.isFingering && !playerAnimatingConditions.isPoweringUp)
                     playerAnimatingConditions.IsIdleOrFloating();
             }
-            if(rateOfChange < 0)
+            if(rateOfChange < 0 && Input.GetKey(KeyCode.B))
             {
+                physicalConditions.AirLimit = 10f;
                 particleForces.BlackWhipApplied();
                 rateOfChange = -0.1f;
                 GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.blackWhipSlider,ref rateOfChange, 0.2f);
-            }    
+            }
         }
         else if(!Input.GetKey(KeyCode.Space) && rateOfChange > 0)
         {
