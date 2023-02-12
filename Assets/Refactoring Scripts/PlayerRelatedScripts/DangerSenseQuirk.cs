@@ -2,18 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DangerSenseQuirk : MonoBehaviour
 {
     [SerializeField]GameObject dangerSense;
     [SerializeField]DronesMainControllerCenter droneSpawner;
     [SerializeField]Transform DekusRealPosition;
+    [SerializeField]QuirksSliders quirksSliders;
     CharacterController cc;
     OneForAllSoundEffects oneForAllSoundEffects;
     PlayerAnimatingConditions playerAnimatingConditions;
     float elapsedTime;
+    float rateOfChange;
     void Start() 
     {
+        rateOfChange = -0.25f;
         DekusRealPosition = GetComponent<Transform>();
         cc = GetComponent<CharacterController>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
@@ -22,14 +26,35 @@ public class DangerSenseQuirk : MonoBehaviour
     }
     public void DodgingLaserBeamCondition()
     {
-        playerAnimatingConditions.canDodgeWithDangerSense = Input.GetKey(KeyCode.D) ? true : false;
+        playerAnimatingConditions.canDodgeWithDangerSense = DangerSenseQuirksState();
     }
     public void DodgingLaserBeamMoving()
     {
-        dangerSense.SetActive(true);
-        DangerSenseInnerVoice();
-        Dodging();
-        GravityApply();
+        if(playerAnimatingConditions.canDodgeWithDangerSense)
+        {
+            dangerSense.SetActive(true);
+            DangerSenseInnerVoice();
+            Dodging();
+            GravityApply();
+        }
+    }
+    private bool DangerSenseQuirksState()
+    {
+        if(Input.GetKey(KeyCode.D) && rateOfChange < 0)
+        {
+            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.dangerSenseSlider, ref rateOfChange);
+            return true;
+        }
+        else if(!Input.GetKey(KeyCode.D) && rateOfChange > 0)
+        {
+            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.dangerSenseSlider, ref rateOfChange);
+            return false;
+        }
+        else if(Input.GetKeyUp(KeyCode.D))
+        {
+            rateOfChange = 0.175f;
+        }
+        return false;    
     }
     private void GravityApply()
     {
