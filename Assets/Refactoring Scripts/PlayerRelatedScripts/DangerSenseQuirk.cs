@@ -9,19 +9,24 @@ public class DangerSenseQuirk : MonoBehaviour
     [SerializeField]GameObject dangerSense;
     [SerializeField]DronesMainControllerCenter droneSpawner;
     [SerializeField]Transform DekusRealPosition;
-    [SerializeField]QuirksSliders quirksSliders;
+    QuirksSliders quirksSliders;
+    UIQuirksRateChange quirksRateChange;
     CharacterController cc;
     OneForAllSoundEffects oneForAllSoundEffects;
     PlayerAnimatingConditions playerAnimatingConditions;
     float elapsedTime;
-    float rateOfChange;
-    void Start() 
+    void Awake()
     {
-        rateOfChange = -0.25f;
+        quirksSliders = GameManager.Instance.quirksSliders;
+        quirksRateChange = GameManager.Instance.quirksRateChange;
         DekusRealPosition = GetComponent<Transform>();
         cc = GetComponent<CharacterController>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         oneForAllSoundEffects = GetComponent<OneForAllSoundEffects>();
+    }
+    void Start() 
+    {
+        quirksRateChange.dangerSenseRate = -0.25f;
         StartCoroutine(CheckForDronesRange());    
     }
     public void DodgingLaserBeamCondition()
@@ -40,19 +45,19 @@ public class DangerSenseQuirk : MonoBehaviour
     }
     private bool DangerSenseQuirksState()
     {
-        if(Input.GetKey(KeyCode.D) && rateOfChange < 0)
+        if(Input.GetKey(KeyCode.D) && quirksRateChange.dangerSenseRate < 0)
         {
-            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.dangerSenseSlider, ref rateOfChange, 0.175f);
+            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.dangerSenseSlider, ref quirksRateChange.dangerSenseRate, 0.175f);
             return true;
         }
-        else if(!Input.GetKey(KeyCode.D) && rateOfChange > 0)
+        else if(!Input.GetKey(KeyCode.D) && quirksRateChange.dangerSenseRate > 0)
         {
-            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.dangerSenseSlider, ref rateOfChange, -0.25f);
+            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.dangerSenseSlider, ref quirksRateChange.dangerSenseRate, -0.25f);
             return false;
         }
         else if(Input.GetKeyUp(KeyCode.D))
         {
-            rateOfChange = 0.175f;
+            quirksRateChange.dangerSenseRate = 0.175f;
         }
         return false;    
     }

@@ -67,7 +67,7 @@ public class AnimationPlaying : MonoBehaviour
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.FingerAttack));
         }
-        else if(playerAnimatingConditions.canUseOneforAll && playerAnimatingConditions.isUsingBlackWhip)
+        else if(playerAnimatingConditions.canUseOneforAll && playerAnimatingConditions.isUsingBlackWhipForAttack)
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.BlackWhip));
         }
@@ -87,7 +87,7 @@ public class AnimationPlaying : MonoBehaviour
             playerAnimatingConditions.isSmashing = false;
             playerAnimatingConditions.isKicking = false;
             playerAnimatingConditions.isFingering = false;
-            playerAnimatingConditions.isUsingBlackWhip = false;
+            playerAnimatingConditions.isUsingBlackWhipForAttack = false;
         }
         if (playerAnimatingConditions.isDead)
         {

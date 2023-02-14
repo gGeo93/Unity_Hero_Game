@@ -7,7 +7,7 @@ public class PhysicalConditions : MonoBehaviour
 {
     private CharacterController cc;
     [SerializeField] private Transform dekusRealTransform;
-    private const float airLimitOffeset = 1f;
+    private const float airLimitOffeset = 2f;
     private float beforeJumpLimit;
     private bool canResetTheAirLimit;
     public float jumpingAcceleration;
@@ -21,10 +21,6 @@ public class PhysicalConditions : MonoBehaviour
             {
                 beforeJumpLimit = dekusRealTransform.position.y + airLimitOffeset;
                 airLimit = beforeJumpLimit;
-                if(playerAnimatingConditions.canUseOneforAll && !Input.GetKey(KeyCode.B))
-                {
-                    airLimit = 5f;
-                }
                 canResetTheAirLimit = true;
                 StartCoroutine(GetLimitAfterAwhile());
             }
@@ -45,7 +41,7 @@ public class PhysicalConditions : MonoBehaviour
     }
     void Start() 
     {
-        AirLimit = 1.5f;
+        AirLimit = 3f;
     }
     IEnumerator GetLimitAfterAwhile()
     {

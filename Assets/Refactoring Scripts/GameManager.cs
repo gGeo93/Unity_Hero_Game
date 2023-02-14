@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
         }
     }
     public QuirksSlidersFunctionality quirksSlidersFunctionality;
+    public QuirksSliders quirksSliders;
+    public UIQuirksRateChange quirksRateChange;
 
     void Awake() => instance = this;
 }

@@ -8,6 +8,7 @@ public class MainController : MonoBehaviour
     AnimationPlaying animationPlaying;
     PlayerStats playerStats;
     PlayerMoving playerMoving;
+    Swinging swinging;
     PlayerJump playerJump;
     IdleOrFloatingCondition idleOrFloating;
     ElectricityScript electricityScript;
@@ -30,6 +31,7 @@ public class MainController : MonoBehaviour
         animatorMainFunctionality = GetComponent<AnimatorMainFunctionality>();
         playerStats = GetComponent<PlayerStats>();
         playerMoving = GetComponent<PlayerMoving>();
+        swinging = GetComponent<Swinging>();
         playerJump = GetComponent<PlayerJump>();
         idleOrFloating = GetComponent<IdleOrFloatingCondition>();
         sweepFall = GetComponent<SweepFall>();
@@ -61,6 +63,7 @@ public class MainController : MonoBehaviour
         shiftingGearQuirk.StartShiftingGear();
         dying.CaseOfDying();
         playerStats.FatigueLoss();
+        swinging.Swing();
         playerJump.Jump();
         playerJump.Fall();
         playerJump.Falling();

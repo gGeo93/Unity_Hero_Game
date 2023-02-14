@@ -13,7 +13,8 @@ public class PlayerAnimatingConditions : MonoBehaviour
     public bool isKicking;
     public bool isFingering;
     public bool isAirFloating;
-    public bool isUsingBlackWhip;
+    public bool isUsingBlackWhipForAttack;
+    public bool isUsingBlackWhipForSwing;
     public bool isUsingFaJin;
     public bool cannotEmmitSmoke;
     public bool isUsingSmokeQuirk;
@@ -42,7 +43,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
                 isSmashing = false;
                 isFingering = false;
 
-                isUsingBlackWhip = false;
+                isUsingBlackWhipForAttack = false;
                 
                 isSweepFalling = false;
                 isUsingFaJin = false;
@@ -63,7 +64,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
                 isSmashing = false;
                 isFingering = false;
 
-                isUsingBlackWhip = false;
+                isUsingBlackWhipForAttack = false;
                 isUsingFaJin = false;
 
                 isSweepFalling = false;

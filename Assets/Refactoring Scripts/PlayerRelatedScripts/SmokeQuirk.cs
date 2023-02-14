@@ -8,14 +8,20 @@ public class SmokeQuirk : MonoBehaviour
     OneForAllSoundEffects soundEffects;
     PlayerLocation playerLocation;
     [SerializeField] ParticleSystem smokeQuirk;
-    [SerializeField] QuirksSliders quirksSliders;
+    QuirksSliders quirksSliders;
+    UIQuirksRateChange quirksRateChange;
     float rateOfQuirkRegain;
     private void Awake() 
     {
-        rateOfQuirkRegain = 0.05f;
+        quirksSliders = GameManager.Instance.quirksSliders;
+        quirksRateChange = GameManager.Instance.quirksRateChange;
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         playerLocation = GetComponent<PlayerLocation>();
         soundEffects = GetComponent<OneForAllSoundEffects>();    
+    }
+    void Start() 
+    {
+        quirksRateChange.smokeScreenRate = 0.05f;
     }
     public void SmokeQuirkActivative()
     {
@@ -38,7 +44,7 @@ public class SmokeQuirk : MonoBehaviour
     {
         while(true)
         {
-            quirksSliders.smokeSlider.value += rateOfQuirkRegain * Time.deltaTime;
+            quirksSliders.smokeSlider.value += quirksRateChange.smokeScreenRate * Time.deltaTime;
             yield return null;
             if(quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue)
             {

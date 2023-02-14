@@ -21,7 +21,7 @@ public class PlayerTurnBehind : MonoBehaviour
         && !playerAnimatingConditions.isFingering 
         && !playerAnimatingConditions.isKicking 
         && !playerAnimatingConditions.isAirFloating
-        && !playerAnimatingConditions.isUsingBlackWhip
+        && !playerAnimatingConditions.isUsingBlackWhipForAttack
         )
         {
             playerAnimatingConditions.isTurningBehind = true;
