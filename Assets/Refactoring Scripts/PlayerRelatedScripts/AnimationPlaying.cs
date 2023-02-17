@@ -71,10 +71,6 @@ public class AnimationPlaying : MonoBehaviour
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.BlackWhip));
         }
-        // if(playerAnimatingConditions.canDodgeWithDangerSense)
-        // {
-        //     dangerSenseQuirk.DodgingLaserBeamMoving();
-        // }
         if(playerAnimatingConditions.isUsingFaJin)
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.Fa_Jin));
