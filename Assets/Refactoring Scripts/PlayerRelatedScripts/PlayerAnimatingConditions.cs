@@ -30,7 +30,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
     
     public void IsIdleOrFloating()
     {
-        if(!Input.GetKey(KeyCode.W) && !isDead)
+        if((!Input.GetKey(KeyCode.W)) && !isDead)
         {
             if(cc.isGrounded)
             {

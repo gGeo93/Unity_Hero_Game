@@ -55,19 +55,19 @@ public class AnimationPlaying : MonoBehaviour
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.PowerUp));
         }
-        else if (playerAnimatingConditions.canUseOneforAll && playerAnimatingConditions.isSmashing)
+        else if (playerAnimatingConditions.isSmashing)
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.Smash));
         }
-        else if (playerAnimatingConditions.canUseOneforAll && playerAnimatingConditions.isKicking)
+        else if (playerAnimatingConditions.isKicking)
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.ShootStyle));
         }
-        else if (playerAnimatingConditions.canUseOneforAll && playerAnimatingConditions.isFingering)
+        else if (playerAnimatingConditions.isFingering)
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.FingerAttack));
         }
-        else if(playerAnimatingConditions.canUseOneforAll && playerAnimatingConditions.isUsingBlackWhipForAttack)
+        else if(playerAnimatingConditions.isUsingBlackWhipForAttack)
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.BlackWhip));
         }

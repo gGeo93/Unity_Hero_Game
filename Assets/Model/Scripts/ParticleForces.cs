@@ -23,9 +23,9 @@ public class ParticleForces : MonoBehaviour
     public List<GameObject> blackWhipColliders = new List<GameObject>();
     Rigidbody fcrb;
     Rigidbody[] blackWhipRbs = new Rigidbody[2];
-    [SerializeField]MeshRenderer[] detroitSmashConcentration;
-    [SerializeField]MeshRenderer shootStyleConcentration;
-    [SerializeField]MeshRenderer fingerSmashConcentration;
+    public MeshRenderer[] detroitSmashConcentration;
+    public MeshRenderer shootStyleConcentration;
+    public MeshRenderer fingerSmashConcentration;
     float explodingForcePower = 10;
     public static int fingersDamage = 20;
     public static int ShootStyleDamage = 30;

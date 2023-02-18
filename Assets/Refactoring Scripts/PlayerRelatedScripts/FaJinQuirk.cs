@@ -6,6 +6,7 @@ public class FaJinQuirk : MonoBehaviour
 {
     PlayerAnimatingConditions playerAnimatingConditions;
     ParticleForces fajinParticlesEffect;
+    OneForAllConditions oneForAll;
     QuirksRateChange quirksRateChange;
     QuirksSliders quirksSliders;
     QuirksSlidersFunctionality quirksSlidersFunctionality;
@@ -15,6 +16,7 @@ public class FaJinQuirk : MonoBehaviour
     {
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         fajinParticlesEffect = GetComponent<ParticleForces>();
+        oneForAll = GetComponent<OneForAllConditions>();
         quirksRateChange = GameManager.Instance.quirksRateChange;
         quirksSliders = GameManager.Instance.quirksSliders;
         quirksSlidersFunctionality = GameManager.Instance.quirksSlidersFunctionality;
@@ -32,12 +34,12 @@ public class FaJinQuirk : MonoBehaviour
         {
             playerAnimatingConditions.isUsingFaJin = true;
             //Fajin Bar goes in a certain rate from 1 to 0
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.FajinSlider, ref quirksRateChange.faJinRate, fajinRechargeRate);
+            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fajinSlider, ref quirksRateChange.faJinRate, fajinRechargeRate);
             //FaJin particles go to a loop
             StartCoroutine(FaJinParticlesApplied());
             //if Q,Z,X stores energy to a specific part of Deku's body
-            
             //3 oneforall bars begin to fill from 0 to 100
+            oneForAll.StoringEnergyToBodyParts();
             //You can swip from storing energy from one part of the body to the other
             //When FaJin bar reaches zero the storing energy process is over and the bar begins to fill at a specific rate
             //The Q,Z,X bars start to lose their energy with a rate
@@ -46,7 +48,7 @@ public class FaJinQuirk : MonoBehaviour
         {
             playerAnimatingConditions.isUsingFaJin = false;
             FaJinParticlesStop();
-            quirksSlidersFunctionality.QuirkRefill(quirksSliders.FajinSlider, ref quirksRateChange.faJinRate, fajinLossRate);
+            quirksSlidersFunctionality.QuirkRefill(quirksSliders.fajinSlider, ref quirksRateChange.faJinRate, fajinLossRate);
         }
         else if(Input.GetKeyUp(KeyCode.G))
         {

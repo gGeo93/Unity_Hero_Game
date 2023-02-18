@@ -7,7 +7,8 @@ public class PhysicalConditions : MonoBehaviour
 {
     private CharacterController cc;
     [SerializeField] private Transform dekusRealTransform;
-    private const float airLimitOffeset = 2f;
+    private const float airLimitOffeset = 1f;
+    private const float airLimitWhileSwinging = 3f;
     private float beforeJumpLimit;
     private bool canResetTheAirLimit;
     public float jumpingAcceleration;
@@ -19,11 +20,10 @@ public class PhysicalConditions : MonoBehaviour
         {
             if(cc.isGrounded)
             {
-                beforeJumpLimit = dekusRealTransform.position.y + airLimitOffeset;
-                airLimit = beforeJumpLimit;
-                canResetTheAirLimit = true;
-                StartCoroutine(GetLimitAfterAwhile());
+                beforeJumpLimit = dekusRealTransform.position.y + (!playerAnimatingConditions.isUsingBlackWhipForSwing ? airLimitOffeset : airLimitWhileSwinging);
             }
+            airLimit = beforeJumpLimit;
+            Debug.Log(airLimit);
             return airLimit;
         } 
         set
@@ -41,7 +41,7 @@ public class PhysicalConditions : MonoBehaviour
     }
     void Start() 
     {
-        AirLimit = 3f;
+        AirLimit = 1.5f;
     }
     IEnumerator GetLimitAfterAwhile()
     {
