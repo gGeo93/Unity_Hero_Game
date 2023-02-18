@@ -7,8 +7,8 @@ public class PhysicalConditions : MonoBehaviour
 {
     private CharacterController cc;
     [SerializeField] private Transform dekusRealTransform;
-    private const float airLimitOffeset = 1f;
-    private const float airLimitWhileSwinging = 3f;
+    private float airLimitOffeset = 1f;
+    private float airLimitWhileSwinging = 3f;
     private float beforeJumpLimit;
     private bool canResetTheAirLimit;
     public float jumpingAcceleration;
@@ -29,7 +29,16 @@ public class PhysicalConditions : MonoBehaviour
         } 
         set
         {
-            airLimit = value;
+            if(playerAnimatingConditions.canUseOneforAll)
+            {
+                airLimitOffeset *= 3f;
+                airLimitWhileSwinging *= 4f;
+            }
+            else
+            {
+                airLimitOffeset = 1f;
+                airLimitWhileSwinging = 3f;
+            }
         }
     }
     public float gravity = 0f;

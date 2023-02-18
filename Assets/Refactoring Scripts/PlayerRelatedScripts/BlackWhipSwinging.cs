@@ -25,12 +25,10 @@ public class BlackWhipSwinging : MonoBehaviour
         if(Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.B) && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isDead)
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = false;
-            physicalConditions.AirLimit = playerAnimatingConditions.canUseOneforAll ? 5f : 1.5f;
         }
         else if(quirksRateChange.blackWhipRate < 0 && Input.GetKey(KeyCode.B) && Input.GetKey(KeyCode.Space) && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isDead)
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = true;
-            physicalConditions.AirLimit = playerAnimatingConditions.canUseOneforAll ? 10f : 5f;
             particleForces.BlackWhipApplied();
             quirksRateChange.blackWhipRate = -0.1f;
             GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, 0.2f);
@@ -45,7 +43,6 @@ public class BlackWhipSwinging : MonoBehaviour
         if(quirksRateChange.blackWhipRate > 0)
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = false;
-            physicalConditions.AirLimit = playerAnimatingConditions.canUseOneforAll ? 5f : 1.5f;
             quirksRateChange.blackWhipRate = 0.1f;
             GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, -0.1f);
         }
