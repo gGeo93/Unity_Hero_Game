@@ -10,7 +10,7 @@ public class AirFloatQuirk : MonoBehaviour
     [SerializeField] GameObject cam2;
     [SerializeField] GameObject cam3;
     QuirksSliders quirksSliders;
-    UIQuirksRateChange quirksRateChange;
+    QuirksRateChange quirksRateChange;
     
     void Awake() 
     {

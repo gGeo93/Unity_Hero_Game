@@ -10,7 +10,7 @@ public class DangerSenseQuirk : MonoBehaviour
     [SerializeField]DronesMainControllerCenter droneSpawner;
     [SerializeField]Transform DekusRealPosition;
     QuirksSliders quirksSliders;
-    UIQuirksRateChange quirksRateChange;
+    QuirksRateChange quirksRateChange;
     CharacterController cc;
     OneForAllSoundEffects oneForAllSoundEffects;
     PlayerAnimatingConditions playerAnimatingConditions;

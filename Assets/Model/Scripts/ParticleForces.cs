@@ -21,8 +21,6 @@ public class ParticleForces : MonoBehaviour
     public ParticleSystem LeftHandBlackWHip;
     public GameObject fingerCollider;
     public List<GameObject> blackWhipColliders = new List<GameObject>();
-    public Image droneImg;
-    public Text droneImgText;
     Rigidbody fcrb;
     Rigidbody[] blackWhipRbs = new Rigidbody[2];
     [SerializeField]MeshRenderer[] detroitSmashConcentration;
@@ -61,16 +59,18 @@ public class ParticleForces : MonoBehaviour
         {
             if (item.TryGetComponent(out Rigidbody rb))
             {
-                if(!item.gameObject.CompareTag("Player"))
+                if(rb != null && item.gameObject.CompareTag("Enemy"))
                 {
                     Transform objectToAnimate = item.GetComponent<Transform>();
-                
                     objectToAnimate.DOShakeRotation(0.5f, Vector3.up * 180f);
-                }
-                if(droneImgText != null && droneImg != null && item.CompareTag("Enemy"))
-                {
-                    droneImgText.text = (int.Parse(droneImgText.text)-explodingForcePower).ToString();
-                    droneImg.rectTransform.localScale -= Vector3.right * (explodingForcePower/100f);
+                    rb.AddForce(Vector3.forward, ForceMode.Force);
+                    Text droneImgText = item.gameObject.GetComponent<DroneHealthLoss>().droneImgText;
+                    Image droneImg = item.gameObject.GetComponent<DroneHealthLoss>().droneImg;
+                    if(droneImgText != null && droneImg != null && item.CompareTag("Enemy"))
+                    {
+                        droneImgText.text = (int.Parse(droneImgText.text)-explodingForcePower).ToString();
+                        droneImg.rectTransform.localScale -= Vector3.right * (explodingForcePower/100f);
+                    }
                 }
             }
         }

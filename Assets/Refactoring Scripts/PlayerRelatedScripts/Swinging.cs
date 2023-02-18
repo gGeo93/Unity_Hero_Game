@@ -7,7 +7,7 @@ public class Swinging : MonoBehaviour
     PhysicalConditions physicalConditions;
     PlayerAnimatingConditions playerAnimatingConditions;
     ParticleForces particleForces;
-    UIQuirksRateChange quirksRateChange;
+    QuirksRateChange quirksRateChange;
     QuirksSliders quirksSliders;
     void Awake()
     {

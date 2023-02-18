@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIQuirksRateChange : MonoBehaviour
+public class QuirksRateChange : MonoBehaviour
 {
     public float dangerSenseRate = 0;
     public float airFloatingRate = 0;

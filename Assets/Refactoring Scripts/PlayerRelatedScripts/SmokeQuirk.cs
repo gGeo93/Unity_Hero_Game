@@ -9,7 +9,7 @@ public class SmokeQuirk : MonoBehaviour
     PlayerLocation playerLocation;
     [SerializeField] ParticleSystem smokeQuirk;
     QuirksSliders quirksSliders;
-    UIQuirksRateChange quirksRateChange;
+    QuirksRateChange quirksRateChange;
     float rateOfQuirkRegain;
     private void Awake() 
     {
