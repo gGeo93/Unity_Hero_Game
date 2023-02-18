@@ -26,7 +26,6 @@ public class DangerSenseQuirk : MonoBehaviour
     }
     void Start() 
     {
-        quirksRateChange.dangerSenseRate = -0.25f;
         StartCoroutine(CheckForDronesRange());    
     }
     public void DodgingLaserBeamCondition()

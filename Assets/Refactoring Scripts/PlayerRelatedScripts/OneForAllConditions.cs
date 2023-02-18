@@ -14,22 +14,22 @@ public class OneForAllConditions : MonoBehaviour
     }
     public void OneforallDifferentUses()
     {
-        if (!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.Q))
+        if (!playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.Q))
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isSmashing = true;
         }
-        else if (!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.Z))
+        else if (!playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.Z))
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isKicking = true;
         }
-        else if (!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.X))
+        else if (!playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.X))
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isFingering = true;
         }
-        else if (playerStats.MpImgBar.rectTransform.transform.localScale.x >= (1.0f - 0.1f) && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.R) && !Input.GetKey(KeyCode.W))
+        else if (!playerAnimatingConditions.isUsingFaJin && playerStats.MpImgBar.rectTransform.transform.localScale.x >= (1.0f - 0.1f) && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && Input.GetKeyDown(KeyCode.R) && !Input.GetKey(KeyCode.W))
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isPoweringUp = true;

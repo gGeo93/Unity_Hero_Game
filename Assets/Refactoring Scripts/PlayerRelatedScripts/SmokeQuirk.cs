@@ -19,10 +19,6 @@ public class SmokeQuirk : MonoBehaviour
         playerLocation = GetComponent<PlayerLocation>();
         soundEffects = GetComponent<OneForAllSoundEffects>();    
     }
-    void Start() 
-    {
-        quirksRateChange.smokeScreenRate = 0.05f;
-    }
     public void SmokeQuirkActivative()
     {
         if (quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.cannotEmmitSmoke && Input.GetKeyDown(KeyCode.S))

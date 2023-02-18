@@ -19,10 +19,6 @@ public class AirFloatQuirk : MonoBehaviour
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         physicalConditions = GetComponent<PhysicalConditions>();    
     }
-    void Start() 
-    {
-        quirksRateChange.airFloatingRate = -0.05f;
-    }
     public void UsingFloatQuirk()
     {
         if (!playerAnimatingConditions.isDead 

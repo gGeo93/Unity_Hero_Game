@@ -19,7 +19,6 @@ public class Swinging : MonoBehaviour
     {
         quirksRateChange = GameManager.Instance.quirksRateChange;
         quirksSliders = GameManager.Instance.quirksSliders;
-        quirksRateChange.blackWhipRate = -0.1f;
     }
     public void Swing()
     {

@@ -106,14 +106,7 @@ public class ParticleForces : MonoBehaviour
         RightHandBlackWHip.gameObject.SetActive(false);
         LeftHandBlackWHip.gameObject.SetActive(false);
     }
-    public void FaJinParticlesApplied()
-    {
-        if(playerAnimatingConditions.isUsingFaJin)
-        {
-            FaJinParticles.Play();
-            StartCoroutine(FaJinDuration());
-        }
-    }
+    
     IEnumerator FaJinDuration()
     {
         int numberOfFaJinConcetrationPower = Random.Range(0, 3);
