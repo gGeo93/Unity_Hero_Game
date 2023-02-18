@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Swinging : MonoBehaviour
+public class BlackWhipSwinging : MonoBehaviour
 {
     PhysicalConditions physicalConditions;
     PlayerAnimatingConditions playerAnimatingConditions;

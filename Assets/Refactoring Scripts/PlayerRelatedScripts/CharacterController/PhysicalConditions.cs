@@ -20,10 +20,11 @@ public class PhysicalConditions : MonoBehaviour
         {
             if(cc.isGrounded)
             {
-                beforeJumpLimit = dekusRealTransform.position.y + (!playerAnimatingConditions.isUsingBlackWhipForSwing ? airLimitOffeset : airLimitWhileSwinging);
+                beforeJumpLimit = dekusRealTransform.position.y + 
+                (!playerAnimatingConditions.isUsingBlackWhipForSwing 
+                ? airLimitOffeset : airLimitWhileSwinging);
             }
             airLimit = beforeJumpLimit;
-            Debug.Log(airLimit);
             return airLimit;
         } 
         set
@@ -42,16 +43,6 @@ public class PhysicalConditions : MonoBehaviour
     void Start() 
     {
         AirLimit = 1.5f;
-    }
-    IEnumerator GetLimitAfterAwhile()
-    {
-        if(canResetTheAirLimit)
-        {
-            yield return new WaitForSeconds(2f);
-            canResetTheAirLimit = false;
-            beforeJumpLimit = dekusRealTransform.position.y - airLimitOffeset;
-            AirLimit = beforeJumpLimit;
-        }
     }
     public void RepairingGravity()
     {
