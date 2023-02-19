@@ -84,6 +84,7 @@ public class AnimationPlaying : MonoBehaviour
             playerAnimatingConditions.isKicking = false;
             playerAnimatingConditions.isFingering = false;
             playerAnimatingConditions.isUsingBlackWhipForAttack = false;
+            playerAnimatingConditions.isUsingBlackWhipForSwing = false;
         }
         if (playerAnimatingConditions.isDead)
         {

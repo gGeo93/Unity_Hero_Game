@@ -21,8 +21,8 @@ public class DroneHealthLoss : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnCollisionEnter(Collision other) {
-
+    private void OnCollisionEnter(Collision other) 
+    {
         if(other.collider.name == "Finger_PS")
         {
             droneImg.rectTransform.localScale -= Vector3.right * (ParticleForces.fingersDamage /150f);

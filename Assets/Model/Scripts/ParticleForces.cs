@@ -106,47 +106,4 @@ public class ParticleForces : MonoBehaviour
         RightHandBlackWHip.gameObject.SetActive(false);
         LeftHandBlackWHip.gameObject.SetActive(false);
     }
-    
-    IEnumerator FaJinDuration()
-    {
-        int numberOfFaJinConcetrationPower = Random.Range(0, 3);
-
-        switch (numberOfFaJinConcetrationPower)
-        {
-            case (int)FaJinConcentrationPowerType.DetroitSmash: detroitSmashConcentration[0].enabled = true; detroitSmashConcentration[1].enabled = true; punchDamage *= 2; break;
-            case (int)FaJinConcentrationPowerType.ShootStyle: shootStyleConcentration.enabled = true; ShootStyleDamage *= 2; break;
-            case (int)FaJinConcentrationPowerType.FingerSmash: fingerSmashConcentration.enabled = true; fingersDamage *= 2; break;
-            default: Debug.Log("FaJin not working"); break;
-        }
-
-        StartCoroutine(FajinForcedEnd(numberOfFaJinConcetrationPower));
-        yield return new WaitForSeconds(20f);
-        Debug.Log("didn't work");
-        FajinEnd(numberOfFaJinConcetrationPower);
-    }
-
-    private void FajinEnd(int numberOfFaJinConcetrationPower)
-    {
-        switch (numberOfFaJinConcetrationPower)
-        {
-            case (int)FaJinConcentrationPowerType.DetroitSmash: detroitSmashConcentration[0].enabled = false; detroitSmashConcentration[1].enabled = false; punchDamage /= 2; break;
-            case (int)FaJinConcentrationPowerType.ShootStyle: shootStyleConcentration.enabled = false; ShootStyleDamage /= 2; break;
-            case (int)FaJinConcentrationPowerType.FingerSmash: fingerSmashConcentration.enabled = false; fingersDamage /= 2; break;
-        }
-        playerAnimatingConditions.isUsingFaJin = false;
-    }
-
-    IEnumerator FajinForcedEnd(int numberOfFaJinConcetrationPower)
-    {
-        while(true)
-        {
-            yield return null;
-            if(electricityScript.isTired)
-            {
-                FajinEnd(numberOfFaJinConcetrationPower);
-                StopAllCoroutines();
-                break;
-            }    
-        }
-    }
 }

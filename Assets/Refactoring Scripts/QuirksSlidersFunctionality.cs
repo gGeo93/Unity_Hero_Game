@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class QuirksSlidersFunctionality : MonoBehaviour
 {
     QuirksSliders quirksSliders;
+    [SerializeField] PlayerAnimatingConditions playerAnimatingConditions;
     void Awake() 
     {
         quirksSliders = GetComponent<QuirksSliders>();
@@ -31,5 +32,24 @@ public class QuirksSlidersFunctionality : MonoBehaviour
         quirkSlider.value += fillingRythm;
         if(quirkSlider.value >= quirkSlider.maxValue - 0.01f)
             fillingRythm = rate;
+    }
+    public void GeneralOFAAttacksPower(float OFAmp)
+    {
+        OFAmp = playerAnimatingConditions.canUseOneforAll ? OFAmp/100f : 0f;
+        OnCalculatingOFAHandsDamage(OFAmp);
+        OnCalculatingOFALegDamage(OFAmp);
+        OnCalculatingOFAFingersDamage(OFAmp);
+    }
+    private void OnCalculatingOFAHandsDamage(float OFAperCent)
+    {
+        ParticleForces.punchDamage = Mathf.FloorToInt((0.40f + OFAperCent) * (quirksSliders.handsAttackSlider.value) + 10);
+    }
+    private void OnCalculatingOFALegDamage(float OFAperCent)
+    {
+        ParticleForces.ShootStyleDamage = Mathf.FloorToInt((0.35f + OFAperCent) * (quirksSliders.legAttackSlider.value + 10));
+    }
+    private void OnCalculatingOFAFingersDamage(float OFAperCent)
+    {
+        ParticleForces.fingersDamage = Mathf.FloorToInt((0.30f + OFAperCent) * (quirksSliders.fingersAttackSlider.value + 10));
     }
 }

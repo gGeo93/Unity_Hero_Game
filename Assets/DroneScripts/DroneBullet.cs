@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class DroneBullet : MonoBehaviour
 {
-    public float speed;
-    public float amountOfDamage;
+    public float speed = 7f;
+    public float amountOfDamage = 2.5f;
     Transform playerPos;
     Vector3 dir;
 
-    private void Start() {
+    void Start() 
+    {
         Destroy(gameObject,5f);
         playerPos = GameObject.FindGameObjectWithTag("PlayerPosition").transform;
         dir = playerPos.position - transform.position;
@@ -20,7 +21,8 @@ public class DroneBullet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other) 
+    {
         if (other.CompareTag("PlayerPosition"))
         {
             other.GetComponentInParent<PlayerStats>().GettingDamage(amountOfDamage);

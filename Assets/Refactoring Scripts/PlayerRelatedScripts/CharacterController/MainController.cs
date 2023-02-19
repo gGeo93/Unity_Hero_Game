@@ -11,6 +11,7 @@ public class MainController : MonoBehaviour
     BlackWhipSwinging swinging;
     PlayerJump playerJump;
     IdleOrFloatingCondition idleOrFloating;
+    QuirksSlidersFunctionality quirksSlidersFunctionality;
     ElectricityScript electricityScript;
     OneForAllConditions oneForAllConditions;
     DangerSenseQuirk dangerSenseQuirk;
@@ -36,6 +37,7 @@ public class MainController : MonoBehaviour
         idleOrFloating = GetComponent<IdleOrFloatingCondition>();
         sweepFall = GetComponent<SweepFall>();
         dying = GetComponent<DyingCase>();
+        quirksSlidersFunctionality = GameManager.Instance.quirksSlidersFunctionality;
         electricityScript = GetComponent<ElectricityScript>();
         oneForAllConditions = GetComponent<OneForAllConditions>();
         shiftingGearQuirk = GetComponent<ShiftingGearQuirk>();
@@ -62,12 +64,14 @@ public class MainController : MonoBehaviour
         playerTurnBehind.PlayerTurns();
         shiftingGearQuirk.StartShiftingGear();
         dying.CaseOfDying();
+        playerStats.HealingProcess();
         playerStats.FatigueLoss();
         swinging.Swing();
         playerJump.Jump();
         playerJump.Fall();
         playerJump.Falling();
         airFloatQuirk.UsingFloatQuirk();
+        quirksSlidersFunctionality.GeneralOFAAttacksPower(playerStats.MpImgBar.rectTransform.transform.localScale.x);
         oneForAllConditions.OneforallDifferentUses();
         playerMoving.Move();
         faJinQuirk.FajinActivating();

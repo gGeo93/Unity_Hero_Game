@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     public RawImage HpImgBar;
     public RawImage MpImgBar;
+    private float healingFactor = 0.025f;
     PlayerAnimatingConditions playerAnimatingConditions;
     ElectricityScript electricityScript;
     AnimatorMainFunctionality animatorMainFunctionality;
@@ -17,16 +18,28 @@ public class PlayerStats : MonoBehaviour
         electricityScript = GetComponent<ElectricityScript>();
         dyingCase = GetComponent<DyingCase>();    
     }
-     public void GettingDamage(float amountOfDamage)
+    public void GettingDamage(float amountOfDamage)
     {
         if(animatorMainFunctionality.CurrentState != nameof(PlayerAnimationState.PowerUp))
         {
-            HpImgBar.rectTransform.localScale -= Vector3.right*amountOfDamage/100.0f;
+            HpImgBar.rectTransform.localScale -= Vector3.right * amountOfDamage/100.0f;
             FixHpOrMpBars();
             if(HpImgBar.rectTransform.localScale.x <= 0)
             {
                 dyingCase.MainCaseOfDying();
             }
+        }
+    }
+    public void HealingProcess()
+    {
+        float hpx = HpImgBar.rectTransform.transform.localScale.x;
+        if(hpx >= 100f)
+        {
+            HpImgBar.rectTransform.transform.localScale = Vector3.right * 100f;
+        }
+        else if(hpx < 100f)
+        {
+            HpImgBar.rectTransform.transform.localScale += Vector3.right * healingFactor/100f;
         }
     }
     public void FatigueLoss()

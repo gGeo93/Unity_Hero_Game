@@ -19,9 +19,9 @@ public class QuirksSliders : MonoBehaviour
 
     void Start() 
     {
-        handsAttackSlider.value = 50;
-        legAttackSlider.value = 50;
-        fingersAttackSlider.value = 50;
+        handsAttackSlider.value = 100;
+        legAttackSlider.value = 100;
+        fingersAttackSlider.value = 100;
 
         dangerSenseSlider.value = 1f;
         airFloatSlider.value = 1f;
