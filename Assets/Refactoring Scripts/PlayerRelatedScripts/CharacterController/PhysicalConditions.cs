@@ -6,6 +6,7 @@ using UnityEngine;
 public class PhysicalConditions : MonoBehaviour
 {
     private CharacterController cc;
+    PlayerAnimatingConditions playerAnimatingConditions;
     [SerializeField] private Transform dekusRealTransform;
     private float airLimitOffeset = 1f;
     private float airLimitWhileSwinging = 3f;
@@ -14,6 +15,7 @@ public class PhysicalConditions : MonoBehaviour
     public float jumpingAcceleration;
     public float fallingAcceleration;
     private float airLimit;
+    public float gravity = 0f;
     public float AirLimit 
     {
         get
@@ -23,6 +25,10 @@ public class PhysicalConditions : MonoBehaviour
                 beforeJumpLimit = dekusRealTransform.position.y + 
                 (!playerAnimatingConditions.isUsingBlackWhipForSwing 
                 ? airLimitOffeset : airLimitWhileSwinging);
+            }
+            else if(gravity < 0 && !playerAnimatingConditions.isUsingBlackWhipForSwing)
+            {
+                beforeJumpLimit = 0f;
             }
             airLimit = beforeJumpLimit;
             return airLimit;
@@ -41,9 +47,6 @@ public class PhysicalConditions : MonoBehaviour
             }
         }
     }
-    public float gravity = 0f;
-    PlayerAnimatingConditions playerAnimatingConditions;
-
     void Awake() 
     {
         cc = GetComponent<CharacterController>();

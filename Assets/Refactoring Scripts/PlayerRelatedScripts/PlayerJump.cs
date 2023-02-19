@@ -32,7 +32,7 @@ public class PlayerJump : MonoBehaviour
                 playerAnimatingConditions.isRunning=false;
                 physicalConditions.gravity += physicalConditions.jumpingAcceleration * Time.deltaTime;
                 cc.Move(Vector3.up * physicalConditions.gravity);                
-                
+
                 if(!playerAnimatingConditions.isUsingBlackWhipForSwing && !playerAnimatingConditions.isSmashing && !playerAnimatingConditions.isKicking && !playerAnimatingConditions.isFingering && !playerAnimatingConditions.isPoweringUp)
                     playerAnimatingConditions.IsIdleOrFloating();
             }
