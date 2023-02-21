@@ -18,6 +18,10 @@ public class PlayerStats : MonoBehaviour
         electricityScript = GetComponent<ElectricityScript>();
         dyingCase = GetComponent<DyingCase>();    
     }
+    void Start() 
+    {
+        HpImgBar.rectTransform.localScale = Vector3.one;    
+    }
     public void GettingDamage(float amountOfDamage)
     {
         if(animatorMainFunctionality.CurrentState != nameof(PlayerAnimationState.PowerUp))
@@ -32,14 +36,13 @@ public class PlayerStats : MonoBehaviour
     }
     public void HealingProcess()
     {
-        float hpx = HpImgBar.rectTransform.transform.localScale.x;
-        if(hpx >= 100f)
+        if(HpImgBar.rectTransform.localScale.x >= 1f)
         {
-            HpImgBar.rectTransform.transform.localScale = Vector3.right * 100f;
+            HpImgBar.rectTransform.localScale = Vector3.one;
         }
-        else if(hpx < 100f)
+        else if(HpImgBar.rectTransform.localScale.x < 1f)
         {
-            HpImgBar.rectTransform.transform.localScale += Vector3.right * healingFactor/100f;
+            HpImgBar.rectTransform.localScale += Vector3.right * healingFactor/100f;
         }
     }
     public void FatigueLoss()

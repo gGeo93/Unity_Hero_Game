@@ -22,7 +22,7 @@ public class PlayerJump : MonoBehaviour
     }
     public void Jump()
     {
-        if(!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && Input.GetKey(KeyCode.Space))
+        if(!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.B)))
         {         
             if(playerAnimatingConditions.isPoweringUp || playerAnimatingConditions.isFingering || playerAnimatingConditions.isSmashing || playerAnimatingConditions.isKicking)
                 physicalConditions.RepairingGravity();

@@ -22,18 +22,14 @@ public class BlackWhipSwinging : MonoBehaviour
     }
     public void Swing()
     {
-        if(Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.B) && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isDead)
-        {
-            playerAnimatingConditions.isUsingBlackWhipForSwing = false;
-        }
-        else if(quirksRateChange.blackWhipRate < 0 && Input.GetKey(KeyCode.B) && Input.GetKey(KeyCode.Space) && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isDead)
+        if(quirksRateChange.blackWhipRate < 0 && Input.GetKey(KeyCode.B) && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isDead)
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = true;
             particleForces.BlackWhipApplied();
             quirksRateChange.blackWhipRate = -0.1f;
             GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, 0.2f);
         }
-        else if((!Input.GetKey(KeyCode.Space) || !Input.GetKey(KeyCode.B)) && quirksRateChange.blackWhipRate > 0)
+        else if(!Input.GetKey(KeyCode.B))
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = false;
             particleForces.BlackWhipStopped();
