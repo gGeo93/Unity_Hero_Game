@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class OneForAllConditions : MonoBehaviour
@@ -44,8 +45,23 @@ public class OneForAllConditions : MonoBehaviour
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isPoweringUp = true;
+            StartCoroutine(PoweringUpConsequences(2f));
         }
     }
+    private IEnumerator PoweringUpConsequences(float powerUpDurationInSeconds)
+    {
+        yield return new WaitForSeconds(powerUpDurationInSeconds);
+        if(playerAnimatingConditions.isPoweringUp)
+        {
+            playerAnimatingConditions.isPoweringUp = false;
+            Debug.Log("OFA 100%");
+            //All OFA slider bars go up to 100 (+)
+            //All OFA attacks +100 (+)
+            //All Quirks' SlideBars rates go higher (+)
+            //Mp bar(fatigue) loss rate go greatly higher (-)
+            //Maybe and a small part of Hp bar(helth) lowers (-)
+        }
+    } 
     public void CannotUseOneForAll()
     {
         if (playerAnimatingConditions.isPoweringUp)

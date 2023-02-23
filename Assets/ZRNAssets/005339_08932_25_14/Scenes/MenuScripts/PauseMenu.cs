@@ -13,15 +13,18 @@ public class PauseMenu : MonoBehaviour,IMenuOptions
    public CinemachineVirtualCamera attackVirtualCamera;
    public Camera maincamera;
    public Camera mapcamera;
+   CursorMode cursorMode;
    
    void Awake() 
    {
        Time.timeScale = 1;
+       Cursor.visible = true;
    }
    void Start() 
    {
         pausingPanel.SetActive(false);    
         instructions.text = originalMessage;
+        Cursor.visible = false;
    }
    void Update() 
    {
@@ -32,6 +35,8 @@ public class PauseMenu : MonoBehaviour,IMenuOptions
         }
         if(theGameIsPaused)
         {
+            Cursor.visible = true;
+            
             maincamera.GetComponent<AudioListener>().enabled = false;
             mapcamera.GetComponent<AudioListener>().enabled = true;
         

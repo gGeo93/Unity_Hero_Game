@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public QuirksSlidersFunctionality quirksSlidersFunctionality;
     public QuirksSliders quirksSliders;
     public QuirksRateChange quirksRateChange;
+    public CursorMode cursorMode;
 
     void Awake() => instance = this;
 }
