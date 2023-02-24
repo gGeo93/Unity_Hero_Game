@@ -27,9 +27,9 @@ public class ParticleForces : MonoBehaviour
     public MeshRenderer shootStyleConcentration;
     public MeshRenderer fingerSmashConcentration;
     float explodingForcePower = 10;
-    public static int fingersDamage = 20;
-    public static int ShootStyleDamage = 30;
-    public static int punchDamage = 20;
+    public int fingersDamage = 20;
+    public int ShootStyleDamage = 30;
+    public int punchDamage = 20;
     PlayerAnimatingConditions playerAnimatingConditions;
     ElectricityScript electricityScript;
 

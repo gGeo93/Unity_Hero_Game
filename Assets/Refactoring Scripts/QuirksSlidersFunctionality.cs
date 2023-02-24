@@ -7,6 +7,7 @@ public class QuirksSlidersFunctionality : MonoBehaviour
 {
     QuirksSliders quirksSliders;
     [SerializeField] PlayerAnimatingConditions playerAnimatingConditions;
+    [SerializeField] ParticleForces particleForces;
     void Awake() 
     {
         quirksSliders = GetComponent<QuirksSliders>();
@@ -35,21 +36,21 @@ public class QuirksSlidersFunctionality : MonoBehaviour
     }
     public void GeneralOFAAttacksPower(float OFAmp)
     {
-        OFAmp = playerAnimatingConditions.canUseOneforAll ? OFAmp/100f : 0f;
+        OFAmp = playerAnimatingConditions.canUseOneforAll ? OFAmp / 100f : 0f;
         OnCalculatingOFAHandsDamage(OFAmp);
         OnCalculatingOFALegDamage(OFAmp);
         OnCalculatingOFAFingersDamage(OFAmp);
     }
     private void OnCalculatingOFAHandsDamage(float OFAperCent)
     {
-        ParticleForces.punchDamage = Mathf.FloorToInt((0.40f + OFAperCent) * (quirksSliders.handsAttackSlider.value) + 10);
+        particleForces.punchDamage = Mathf.FloorToInt((0.40f + OFAperCent) * (quirksSliders.handsAttackSlider.value) + 10);
     }
     private void OnCalculatingOFALegDamage(float OFAperCent)
     {
-        ParticleForces.ShootStyleDamage = Mathf.FloorToInt((0.35f + OFAperCent) * (quirksSliders.legAttackSlider.value + 10));
+        particleForces.ShootStyleDamage = Mathf.FloorToInt((0.35f + OFAperCent) * (quirksSliders.legAttackSlider.value + 10));
     }
     private void OnCalculatingOFAFingersDamage(float OFAperCent)
     {
-        ParticleForces.fingersDamage = Mathf.FloorToInt((0.30f + OFAperCent) * (quirksSliders.fingersAttackSlider.value + 10));
+        particleForces.fingersDamage = Mathf.FloorToInt((0.30f + OFAperCent) * (quirksSliders.fingersAttackSlider.value + 10));
     }
 }

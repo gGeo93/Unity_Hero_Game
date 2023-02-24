@@ -7,6 +7,8 @@ public class PlayerStats : MonoBehaviour
     public RawImage HpImgBar;
     public RawImage MpImgBar;
     private float healingFactor = 0.025f;
+    private float fatigueLossRate = 0.005f;
+    private float regainingStrengthRate = 0.1f;
     PlayerAnimatingConditions playerAnimatingConditions;
     ElectricityScript electricityScript;
     AnimatorMainFunctionality animatorMainFunctionality;
@@ -24,14 +26,11 @@ public class PlayerStats : MonoBehaviour
     }
     public void GettingDamage(float amountOfDamage)
     {
-        if(animatorMainFunctionality.CurrentState != nameof(PlayerAnimationState.PowerUp))
+        HpImgBar.rectTransform.localScale -= Vector3.right * amountOfDamage/100.0f;
+        FixHpOrMpBars();
+        if(HpImgBar.rectTransform.localScale.x <= 0)
         {
-            HpImgBar.rectTransform.localScale -= Vector3.right * amountOfDamage/100.0f;
-            FixHpOrMpBars();
-            if(HpImgBar.rectTransform.localScale.x <= 0)
-            {
-                dyingCase.MainCaseOfDying();
-            }
+            dyingCase.MainCaseOfDying();
         }
     }
     public void HealingProcess()
@@ -56,6 +55,14 @@ public class PlayerStats : MonoBehaviour
             StartCoroutine(RegainingStrength());
         }
     }
+    public void SetFatigueLossRate(float fatigueLossRate)
+    {
+        this.fatigueLossRate = fatigueLossRate;
+    }
+    public void SetRegainingStrengthRate(float regainingStrengthRate)
+    {
+        this.regainingStrengthRate = regainingStrengthRate;
+    }
     private IEnumerator GettingTired()
     {
         if(playerAnimatingConditions.canUseOneforAll)
@@ -64,7 +71,7 @@ public class PlayerStats : MonoBehaviour
             {
                 if(!PauseMenu.theGameIsPaused)
                 {
-                    MpImgBar.rectTransform.localScale -= Vector3.right * 0.005f/100.0f;
+                    MpImgBar.rectTransform.localScale -= Vector3.right * fatigueLossRate/100.0f;
                 }
                 yield return new WaitForSeconds(3.0f);
             }
@@ -76,7 +83,7 @@ public class PlayerStats : MonoBehaviour
     {
         while(!playerAnimatingConditions.canUseOneforAll && MpImgBar.rectTransform.transform.localScale.x < 1)
         {
-            MpImgBar.rectTransform.localScale += Vector3.right * 0.1f/100.0f;
+            MpImgBar.rectTransform.localScale += Vector3.right * regainingStrengthRate/100.0f;
             yield return new WaitForSeconds(1.0f);
         }
         electricityScript.isTired = false;

@@ -56,12 +56,52 @@ public class OneForAllConditions : MonoBehaviour
             playerAnimatingConditions.isPoweringUp = false;
             Debug.Log("OFA 100%");
             //All OFA slider bars go up to 100 (+)
+            OFAMaxSliderValue();
             //All OFA attacks +100 (+)
+            OFAPower(50);
             //All Quirks' SlideBars rates go higher (+)
+            OFAQuirksRatesRise();
             //Mp bar(fatigue) loss rate go greatly higher (-)
-            //Maybe and a small part of Hp bar(helth) lowers (-)
+            MpLossRateRise();
+            //Maybe and a part of Hp bar(helth) lowers (-)
+            HpLoss();
         }
-    } 
+    }
+
+    private void MpLossRateRise()
+    {
+        playerStats.SetFatigueLossRate(0.01f);
+        playerStats.SetRegainingStrengthRate(0.05f);
+    }
+
+    private void HpLoss()
+    {
+        float healthRemaining = playerStats.HpImgBar.rectTransform.localScale.x;
+        float amountOfDamage = healthRemaining > 0.55f ? 50f : 10f;
+        playerStats.GettingDamage(amountOfDamage);
+    }
+
+    private void OFAQuirksRatesRise()
+    {
+        quirksRateChange.detroitSmashRate += 1;
+        quirksRateChange.shootStyleRate += 1;
+        quirksRateChange.fingerSmashRate += 1;
+    }
+
+    private void OFAPower(int powerParam)
+    {
+        particleForces.punchDamage += powerParam;
+        particleForces.ShootStyleDamage += powerParam;
+        particleForces.fingersDamage += powerParam;
+    }
+
+    private void OFAMaxSliderValue()
+    {
+        quirksSliders.handsAttackSlider.value = 100;
+        quirksSliders.legAttackSlider.value = 100;
+        quirksSliders.fingersAttackSlider.value = 100;
+    }
+
     public void CannotUseOneForAll()
     {
         if (playerAnimatingConditions.isPoweringUp)
