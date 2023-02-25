@@ -71,7 +71,6 @@ public class MainController : MonoBehaviour
         playerJump.Fall();
         playerJump.Falling();
         airFloatQuirk.UsingFloatQuirk();
-        quirksSlidersFunctionality.GeneralOFAAttacksPower(playerStats.MpImgBar.rectTransform.transform.localScale.x);
         oneForAllConditions.OneforallDifferentUses();
         playerMoving.Move();
         faJinQuirk.FajinActivating();

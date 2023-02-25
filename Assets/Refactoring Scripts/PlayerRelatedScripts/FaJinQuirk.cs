@@ -10,8 +10,8 @@ public class FaJinQuirk : MonoBehaviour
     QuirksRateChange quirksRateChange;
     QuirksSliders quirksSliders;
     QuirksSlidersFunctionality quirksSlidersFunctionality;
-    const float fajinLossRate = -0.25f;
-    const float fajinRechargeRate = 0.05f;
+    const float fajinLossRate = -0.20f;
+    const float fajinRechargeRate = 0.15f;
     void Awake() 
     {
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();

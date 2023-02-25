@@ -23,23 +23,36 @@ public class OneForAllConditions : MonoBehaviour
     }
     public void OneforallDifferentUses()
     {
+        if(!playerAnimatingConditions.canUseOneforAll)
+        {
+            OFAPowerReset();
+        }
         if (Input.GetKeyDown(KeyCode.Q) && quirksSliders.handsAttackSlider.value > 0 && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && !playerAnimatingConditions.isTurningBehind)
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isSmashing = true;
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.handsAttackSlider, 20);
+            if(playerAnimatingConditions.canUseOneforAll)
+                quirksSliders.handsAttackSlider.value = 0;
+            else
+                quirksSlidersFunctionality.QuirkEndurance(quirksSliders.handsAttackSlider, 20);
         }
         else if (Input.GetKeyDown(KeyCode.Z) && quirksSliders.legAttackSlider.value > 0 && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && !playerAnimatingConditions.isTurningBehind)
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isKicking = true;
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.legAttackSlider, 15);
+            if(playerAnimatingConditions.canUseOneforAll)
+                quirksSliders.legAttackSlider.value = 0;
+            else
+               quirksSlidersFunctionality.QuirkEndurance(quirksSliders.legAttackSlider, 15);
         }
         else if (Input.GetKeyDown(KeyCode.X) && quirksSliders.fingersAttackSlider.value > 0 && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && !playerAnimatingConditions.isTurningBehind)
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isFingering = true;
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fingersAttackSlider, 10);
+            if(playerAnimatingConditions.canUseOneforAll)
+                quirksSliders.fingersAttackSlider.value = 0;
+            else
+                quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fingersAttackSlider, 10);
         }
         else if (Input.GetKeyDown(KeyCode.R) && !playerAnimatingConditions.isUsingFaJin && playerStats.MpImgBar.rectTransform.transform.localScale.x >= (1.0f - 0.1f) && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && !Input.GetKey(KeyCode.W))
         {
@@ -48,6 +61,14 @@ public class OneForAllConditions : MonoBehaviour
             StartCoroutine(PoweringUpConsequences(2f));
         }
     }
+
+    private void OFAPowerReset()
+    {
+        particleForces.punchDamage = 20;
+        particleForces.ShootStyleDamage = 30;
+        particleForces.fingersDamage = 20;
+    }
+
     private IEnumerator PoweringUpConsequences(float powerUpDurationInSeconds)
     {
         yield return new WaitForSeconds(powerUpDurationInSeconds);
@@ -107,7 +128,7 @@ public class OneForAllConditions : MonoBehaviour
         if (playerAnimatingConditions.isPoweringUp)
             playerAnimatingConditions.canUseOneforAll = false;
     }
-    public void StoringEnergyToBodyParts()
+    public void StoringEnergyToBodyParts()//enable false
     {
         if(playerAnimatingConditions.isUsingFaJin)
         {

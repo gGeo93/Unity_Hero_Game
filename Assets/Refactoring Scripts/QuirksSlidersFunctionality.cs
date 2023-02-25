@@ -34,23 +34,4 @@ public class QuirksSlidersFunctionality : MonoBehaviour
         if(quirkSlider.value >= quirkSlider.maxValue - 0.01f)
             fillingRythm = rate;
     }
-    public void GeneralOFAAttacksPower(float OFAmp)
-    {
-        OFAmp = playerAnimatingConditions.canUseOneforAll ? OFAmp / 100f : 0f;
-        OnCalculatingOFAHandsDamage(OFAmp);
-        OnCalculatingOFALegDamage(OFAmp);
-        OnCalculatingOFAFingersDamage(OFAmp);
-    }
-    private void OnCalculatingOFAHandsDamage(float OFAperCent)
-    {
-        particleForces.punchDamage = Mathf.FloorToInt((0.40f + OFAperCent) * (quirksSliders.handsAttackSlider.value) + 10);
-    }
-    private void OnCalculatingOFALegDamage(float OFAperCent)
-    {
-        particleForces.ShootStyleDamage = Mathf.FloorToInt((0.35f + OFAperCent) * (quirksSliders.legAttackSlider.value + 10));
-    }
-    private void OnCalculatingOFAFingersDamage(float OFAperCent)
-    {
-        particleForces.fingersDamage = Mathf.FloorToInt((0.30f + OFAperCent) * (quirksSliders.fingersAttackSlider.value + 10));
-    }
 }
