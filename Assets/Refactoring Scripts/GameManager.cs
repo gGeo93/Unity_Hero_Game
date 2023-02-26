@@ -16,9 +16,18 @@ public class GameManager : MonoBehaviour
             instance = value;
         }
     }
-    public QuirksSlidersFunctionality quirksSlidersFunctionality;
-    public QuirksSliders quirksSliders;
-    public QuirksRateChange quirksRateChange;
+    [SerializeField] Transform uiTransform;
+    [SerializeField] Transform audioManipulator;
+    [SerializeField] Transform player;
+    public Transform UITransform{get; private set;}
+    public Transform AudioManipulator{get; private set;}
+    public Transform Player{get; private set;}
 
-    void Awake() => instance = this;
+    void Awake()
+    {
+        UITransform = uiTransform;
+        AudioManipulator = audioManipulator;
+        Player = player;
+        instance = this;
+    }    
 }

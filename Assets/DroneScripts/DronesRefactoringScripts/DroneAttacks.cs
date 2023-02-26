@@ -16,7 +16,23 @@ public class DroneAttacks : MonoBehaviour
     public bool IsAboutToExplode { get; private set; }
     [SerializeField] MeshRenderer explosionIndicator;
     bool canDodge;
+    private OneForAllSoundEffects enemySoundEffects;
+    private PlayerStats playerStats;
+    private PlayerAnimatingConditions playerAnimatingConditions;
+    private SweepFall sweepFall;
+    private Transform dekusRealPosition;
+    private DangerSenseQuirk dangerSenseQuirk;
 
+    void Awake() 
+    {
+        enemySoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
+        dekusRealPosition = GameManager.Instance.Player;
+        playerStats = GameManager.Instance.Player.GetComponent<PlayerStats>();
+        playerAnimatingConditions = GameManager.Instance.Player.GetComponent<PlayerAnimatingConditions>();
+        dekusRealPosition = GameManager.Instance.Player;
+        sweepFall = GameManager.Instance.Player.GetComponent<SweepFall>();
+        dangerSenseQuirk = GameManager.Instance.Player.GetComponent<DangerSenseQuirk>();    
+    }
     void OnEnable() 
     {
         droneController = GetComponent<DroneController>();
@@ -33,10 +49,10 @@ public class DroneAttacks : MonoBehaviour
     }
     public void LaserBeamAttack()
     {
-        if(Vector3.Distance(transform.position, droneController.dronesMainController.DekusRealPosition.transform.position) <= fireRange)
+        if(Vector3.Distance(transform.position, dekusRealPosition.transform.position) <= fireRange)
         {
             fireTimer -= Time.deltaTime;
-            if (fireTimer <= 0 && !droneController.dronesMainController.PlayerAnimatingConditions.isUsingSmokeQuirk && droneController.dronesMainController.PlayerAnimatingConditions.canGoShiftingSpeed)
+            if (fireTimer <= 0 && !playerAnimatingConditions.isUsingSmokeQuirk && playerAnimatingConditions.canGoShiftingSpeed)
             {
                 Instantiate(bullet, transform.position, Quaternion.identity);
                 fireTimer = 2f;
@@ -44,9 +60,9 @@ public class DroneAttacks : MonoBehaviour
                 if(canDodge)
                 {
                     canDodge = false;
-                    if(droneController.dronesMainController.PlayerAnimatingConditions.canDodgeWithDangerSense)
+                    if(playerAnimatingConditions.canDodgeWithDangerSense)
                     {
-                        droneController.dronesMainController.dangerSenseQuirk.DodgingLaserBeamMoving();
+                        dangerSenseQuirk.DodgingLaserBeamMoving();
                         StartCoroutine(IntentionallyDangerSensePossibleRate());
                     }
                 }
@@ -69,20 +85,20 @@ public class DroneAttacks : MonoBehaviour
             yield return new WaitForSeconds(30f);
             droneExplosion.Play();
             ExplosiveForce();
-            droneController.dronesMainController.PlayExplosionSound();
+            enemySoundEffects.PlayEnemySound(0);
             IsAboutToExplode = false;
-            explosionIndicator.enabled = droneController.dronesMainController.PlayerAnimatingConditions.isUsingSmokeQuirk ? false : true;
+            explosionIndicator.enabled = playerAnimatingConditions.isUsingSmokeQuirk ? false : true;
             yield return new WaitForSeconds(3f);
             droneExplosion.Stop();
         }
     }
     void ExplosiveForce()
     {
-        if((droneController.dronesMainController.DekusRealPosition.transform.position - transform.position).magnitude <= explosionRadius)
+        if((dekusRealPosition.transform.position - transform.position).magnitude <= explosionRadius)
         {
-            droneController.dronesMainController.PlayerStats.GettingDamage(10f);
-            droneController.dronesMainController.SweepFall.sweepFallDirection = (droneController.dronesMainController.DekusRealPosition.transform.position - transform.position).normalized;
-            droneController.dronesMainController.PlayerAnimatingConditions.isSweepFalling = true;
+            playerStats.GettingDamage(10f);
+            sweepFall.sweepFallDirection = (dekusRealPosition.transform.position - transform.position).normalized;
+            playerAnimatingConditions.isSweepFalling = true;
         }
     }
 }

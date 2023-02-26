@@ -2,34 +2,38 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DroneController : MonoBehaviour,ISettingUpEnemy
+public class DroneController : MonoBehaviour
 {
-    public DronesMainControllerCenter dronesMainController;
+    DronesMainControllerCenter dronesMainController;
     public MeshRenderer enemyMapPosition;
+    OneForAllSoundEffects oneForAllSoundEffects;
+    PlayerAnimatingConditions playerAnimatingConditions;
     DroneAttacks droneAttacks;
     DroneAI droneAI;
     
-    
-    public void DroneSetUp(DronesMainControllerCenter dronesMainController)
-    {
-        this.dronesMainController = dronesMainController;
-    }
     void OnEnable() 
     {
+        oneForAllSoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
+        playerAnimatingConditions = GameManager.Instance.Player.GetComponent<PlayerAnimatingConditions>();
         droneAI = GetComponent<DroneAI>();
         droneAttacks = GetComponent<DroneAttacks>();
         enemyMapPosition.enabled = true;
     }
 
-    void OnDestroy() {
+    void OnDestroy() 
+    {
         this.dronesMainController.DroneRemover(this);
         if(this.dronesMainController.numberOfEnemiesSpawned >= 3)
-            this.dronesMainController.OneForAllSoundEffects.ChangeBackgroundSound();
+            oneForAllSoundEffects.ChangeBackgroundSound();
     }
     void Update()
     {
         droneAttacks.LaserBeamAttack();
         droneAI.DroneMind();
-        enemyMapPosition.enabled = dronesMainController.PlayerAnimatingConditions.isUsingSmokeQuirk ? false : true;
+        enemyMapPosition.enabled = playerAnimatingConditions.isUsingSmokeQuirk ? false : true;
+    }
+    public void SetUpDrone(DronesMainControllerCenter dronesMainController)
+    {
+        this.dronesMainController = dronesMainController;
     }
 }

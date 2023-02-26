@@ -11,11 +11,13 @@ public class AirFloatQuirk : MonoBehaviour
     [SerializeField] GameObject cam3;
     QuirksSliders quirksSliders;
     QuirksRateChange quirksRateChange;
+    QuirksSlidersFunctionality quirksSlidersFunctionality;
     
     void Awake() 
     {
-        quirksSliders = GameManager.Instance.quirksSliders;
-        quirksRateChange = GameManager.Instance.quirksRateChange;
+        quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
+        quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
+        quirksSlidersFunctionality = GameManager.Instance.UITransform.GetComponent<QuirksSlidersFunctionality>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         physicalConditions = GetComponent<PhysicalConditions>();    
     }
@@ -75,12 +77,12 @@ public class AirFloatQuirk : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.F) && quirksRateChange.airFloatingRate < 0)
         {
-            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.airFloatSlider, ref quirksRateChange.airFloatingRate, 0.05f);
+            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.airFloatSlider, ref quirksRateChange.airFloatingRate, 0.05f);
             return true;
         }
         else if(!Input.GetKey(KeyCode.F) && quirksRateChange.airFloatingRate > 0)
         {
-            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.airFloatSlider, ref quirksRateChange.airFloatingRate, -0.05f);
+            quirksSlidersFunctionality.QuirkRefill(quirksSliders.airFloatSlider, ref quirksRateChange.airFloatingRate, -0.05f);
             return false;
         }
         else if(Input.GetKeyUp(KeyCode.F))

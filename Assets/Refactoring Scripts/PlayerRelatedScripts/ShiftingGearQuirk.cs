@@ -16,12 +16,12 @@ public class ShiftingGearQuirk : MonoBehaviour
     [SerializeField] Transform dekus_RealPosition;
     void Awake() 
     {
+        oneForAllSoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
         cc = GetComponent<CharacterController>();
         animatorMainFunctionality = GetComponent<AnimatorMainFunctionality>();
         physicalConditions = GetComponent<PhysicalConditions>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         playerStats = GetComponent<PlayerStats>();
-        oneForAllSoundEffects = GetComponent<OneForAllSoundEffects>();
     }
     public void StartShiftingGear()
     {

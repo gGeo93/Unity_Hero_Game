@@ -14,7 +14,7 @@ public class PlayerJump : MonoBehaviour
     
     void Awake() 
     {
-        quirksSliders = GameManager.Instance.quirksSliders;
+        quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
         cc = GetComponent<CharacterController>();
         physicalConditions = GetComponent<PhysicalConditions>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();

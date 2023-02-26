@@ -7,18 +7,22 @@ public class DroneAI : MonoBehaviour
 {
     DroneController droneController;
     [SerializeField] NavMeshAgent agent;
+    PlayerAnimatingConditions playerAnimatingConditions;
+    Transform dekusRealPosition;
 
     void OnEnable() 
     {
+        playerAnimatingConditions = GameManager.Instance.Player.GetComponent<PlayerAnimatingConditions>();
+        dekusRealPosition = GameManager.Instance.Player;
         droneController = GetComponent<DroneController>();    
     }
     public void DroneMind()
     {
-        if(agent.enabled && !droneController.dronesMainController.PlayerAnimatingConditions.isUsingSmokeQuirk)
+        if(agent.enabled && !playerAnimatingConditions.isUsingSmokeQuirk)
         {
-            agent.SetDestination(droneController.dronesMainController.DekusRealPosition.transform.position);
+            agent.SetDestination(dekusRealPosition.transform.position);
         }
-        else if(agent.enabled && droneController.dronesMainController.PlayerAnimatingConditions.isUsingSmokeQuirk)
+        else if(agent.enabled && playerAnimatingConditions.isUsingSmokeQuirk)
         {
             agent.SetDestination(this.transform.position);
         }

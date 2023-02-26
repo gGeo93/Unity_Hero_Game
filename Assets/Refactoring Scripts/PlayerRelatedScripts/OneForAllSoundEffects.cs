@@ -8,6 +8,7 @@ public class OneForAllSoundEffects : MonoBehaviour
     [SerializeField]AudioClip lowTensionBackgroundMusic;
     [SerializeField]AudioClip highTensionBackgroundMusic;
     [SerializeField]List<AudioClip> oneForAllSounds;
+    [SerializeField]List<AudioClip> enemySounds;
 
     private void OnEnable() 
     {
@@ -27,5 +28,9 @@ public class OneForAllSoundEffects : MonoBehaviour
     public void PlayAnimSound(int index)
     {
         audioSource.PlayOneShot(oneForAllSounds[index]);
+    }
+    public void PlayEnemySound(int index)
+    {
+        audioSource.PlayOneShot(enemySounds[index]);
     }
 }

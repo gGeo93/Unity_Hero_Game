@@ -17,9 +17,9 @@ public class FaJinQuirk : MonoBehaviour
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         fajinParticlesEffect = GetComponent<ParticleForces>();
         oneForAll = GetComponent<OneForAllConditions>();
-        quirksRateChange = GameManager.Instance.quirksRateChange;
-        quirksSliders = GameManager.Instance.quirksSliders;
-        quirksSlidersFunctionality = GameManager.Instance.quirksSlidersFunctionality;
+        quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
+        quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
+        quirksSlidersFunctionality = GameManager.Instance.UITransform.GetComponent<QuirksSlidersFunctionality>();
     }
     public void FajinActivating()
     {

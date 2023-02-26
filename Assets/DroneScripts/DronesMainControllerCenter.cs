@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DronesMainControllerCenter : MonoBehaviour,ISettingUpEnemyParams
+public class DronesMainControllerCenter : MonoBehaviour
 {
     public MeshRenderer DroneLocation;
     [SerializeField]DroneController initialDrone;
@@ -18,30 +18,11 @@ public class DronesMainControllerCenter : MonoBehaviour,ISettingUpEnemyParams
     [SerializeField] int numberOfSpawningEnemies = 5;
     public float explosionRadius = 10f;
     public int numberOfEnemiesSpawned;
-    [SerializeField]AudioSource audioSource;
-
-    [SerializeField]Transform dekusRealPosition;
-    [SerializeField]PlayerAnimatingConditions playerAnimatingConditions;
-    [SerializeField]AudioClip explosionSound;
-    [SerializeField]OneForAllSoundEffects oneForAllSoundEffects;
-    [SerializeField]SweepFall sweepFall;
-    [SerializeField]PlayerStats playerStats;
-    [SerializeField]DangerSenseQuirk dangerSense;
-    
-    public PlayerStats PlayerStats => playerStats;
-    public Transform DekusRealPosition {get{ return dekusRealPosition; } set{}}
-    public PlayerAnimatingConditions PlayerAnimatingConditions => playerAnimatingConditions;
-    public AudioClip ExplosionSound => explosionSound;
-    public OneForAllSoundEffects OneForAllSoundEffects => oneForAllSoundEffects;
-    public SweepFall SweepFall => sweepFall;
-    public DronesMainControllerCenter DronesMainController => this;
-
-    public DangerSenseQuirk dangerSenseQuirk => dangerSense;
 
     void Start()
     {
+        initialDrone.GetComponent<DroneController>().SetUpDrone(this);
         activeDrones.Add(initialDrone);
-        initialDrone.DroneSetUp(DronesMainController);
         DroneLocation.enabled = true;
         numberOfEnemiesSpawned=0;
         StartCoroutine(SpawningRate(numberOfSpawningEnemies));
@@ -77,7 +58,6 @@ public class DronesMainControllerCenter : MonoBehaviour,ISettingUpEnemyParams
     {
         activeDrones.Remove(d);
     }
-    public void PlayExplosionSound() => audioSource.PlayOneShot(ExplosionSound);
     private void FixFelonyBar()
     {
         if(FelonyImg.rectTransform.transform.localScale.x < 0)
@@ -96,8 +76,8 @@ public class DronesMainControllerCenter : MonoBehaviour,ISettingUpEnemyParams
             yield return new WaitForSeconds(30f);
             Debug.Log(numberOfEnemiesSpawned);
             GameObject go = Instantiate(dronePrefab, spawnPoints[RandomSpawnPointIndex()].position, Quaternion.identity);
+            go.GetComponent<DroneController>().SetUpDrone(this);
             activeDrones.Add(go.GetComponent<DroneController>());
-            go.GetComponent<DroneController>().DroneSetUp(this);
             numberOfEnemiesSpawned++;
         }while(numberOfEnemiesSpawned<numberOfTotalSpawningEnemies);
     }

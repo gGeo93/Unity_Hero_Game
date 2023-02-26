@@ -10,12 +10,14 @@ public class OneForAllConditions : MonoBehaviour
     QuirksRateChange quirksRateChange;
     QuirksSliders quirksSliders;
     QuirksSlidersFunctionality quirksSlidersFunctionality;
+    OneForAllSoundEffects oneForAllSoundEffects;
     
     void Awake() 
     {
-        quirksRateChange = GameManager.Instance.quirksRateChange;
-        quirksSliders = GameManager.Instance.quirksSliders;
-        quirksSlidersFunctionality = GameManager.Instance.quirksSlidersFunctionality;
+        oneForAllSoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
+        quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
+        quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
+        quirksSlidersFunctionality = GameManager.Instance.UITransform.GetComponent<QuirksSlidersFunctionality>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         particleForces = GetComponent<ParticleForces>();
         physicalConditions = GetComponent<PhysicalConditions>();
@@ -75,6 +77,7 @@ public class OneForAllConditions : MonoBehaviour
         if(playerAnimatingConditions.isPoweringUp)
         {
             playerAnimatingConditions.isPoweringUp = false;
+            playerAnimatingConditions.canUseOneforAll = true;
             Debug.Log("OFA 100%");
             //All OFA slider bars go up to 100 (+)
             OFAMaxSliderValue();
@@ -149,5 +152,9 @@ public class OneForAllConditions : MonoBehaviour
                 quirksSlidersFunctionality.QuirkRefill(quirksSliders.fingersAttackSlider, ref quirksRateChange.fingerSmashRate, -1);
             }
         }
+    }
+    public void OFAVoiceSoundEffect(int index)//Triggered By Animation Event
+    {
+        oneForAllSoundEffects.PlayAnimSound(index);
     }
 }

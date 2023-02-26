@@ -9,6 +9,7 @@ public class BlackWhipSwinging : MonoBehaviour
     ParticleForces particleForces;
     QuirksRateChange quirksRateChange;
     QuirksSliders quirksSliders;
+    QuirksSlidersFunctionality quirksSlidersFunctionality;
     void Awake()
     {
         physicalConditions = GetComponent<PhysicalConditions>();
@@ -17,8 +18,9 @@ public class BlackWhipSwinging : MonoBehaviour
     }
     void Start() 
     {
-        quirksRateChange = GameManager.Instance.quirksRateChange;
-        quirksSliders = GameManager.Instance.quirksSliders;
+        quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
+        quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
+        quirksSlidersFunctionality = GameManager.Instance.UITransform.GetComponent<QuirksSlidersFunctionality>();
     }
     public void Swing()
     {
@@ -27,20 +29,20 @@ public class BlackWhipSwinging : MonoBehaviour
             playerAnimatingConditions.isUsingBlackWhipForSwing = true;
             particleForces.BlackWhipApplied();
             quirksRateChange.blackWhipRate = -0.1f;
-            GameManager.Instance.quirksSlidersFunctionality.QuirkEndurance(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, 0.2f);
+            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, 0.2f);
         }
         else if(!Input.GetKey(KeyCode.B))
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = false;
             particleForces.BlackWhipStopped();
             quirksRateChange.blackWhipRate = 0.1f;
-            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, -0.1f);
+            quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, -0.1f);
         }
         if(quirksRateChange.blackWhipRate > 0)
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = false;
             quirksRateChange.blackWhipRate = 0.1f;
-            GameManager.Instance.quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, -0.1f);
+            quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, -0.1f);
         }
     }
 }

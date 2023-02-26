@@ -13,11 +13,11 @@ public class SmokeQuirk : MonoBehaviour
     float rateOfQuirkRegain;
     private void Awake() 
     {
-        quirksSliders = GameManager.Instance.quirksSliders;
-        quirksRateChange = GameManager.Instance.quirksRateChange;
+        quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
+        quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
+        soundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();    
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         playerLocation = GetComponent<PlayerLocation>();
-        soundEffects = GetComponent<OneForAllSoundEffects>();    
     }
     public void SmokeQuirkActivative()
     {

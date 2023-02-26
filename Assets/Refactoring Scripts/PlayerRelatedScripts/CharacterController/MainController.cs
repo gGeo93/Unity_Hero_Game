@@ -39,7 +39,7 @@ public class MainController : MonoBehaviour
         idleOrFloating = GetComponent<IdleOrFloatingCondition>();
         sweepFall = GetComponent<SweepFall>();
         dying = GetComponent<DyingCase>();
-        quirksSlidersFunctionality = GameManager.Instance.quirksSlidersFunctionality;
+        quirksSlidersFunctionality = GameManager.Instance.UITransform.GetComponent<QuirksSlidersFunctionality>();
         electricityScript = GetComponent<ElectricityScript>();
         oneForAllConditions = GetComponent<OneForAllConditions>();
         shiftingGearQuirk = GetComponent<ShiftingGearQuirk>();
