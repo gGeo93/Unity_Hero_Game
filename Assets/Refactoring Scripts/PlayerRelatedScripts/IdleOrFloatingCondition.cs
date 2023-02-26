@@ -14,6 +14,7 @@ public class IdleOrFloatingCondition : MonoBehaviour
         if ((Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.LeftShift))
             && !Input.GetKey(KeyCode.Space)
             && !Input.GetKey(KeyCode.F)
+            && !playerAnimatingConditions.isLanding
             && !playerAnimatingConditions.isUsingFaJin
             && !playerAnimatingConditions.isSweepFalling
             && !playerAnimatingConditions.isDead

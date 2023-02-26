@@ -18,7 +18,7 @@ public class PlayerMoving : MonoBehaviour
 
     public void Move()
     {
-        if (!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.LeftShift))
+        if (!playerAnimatingConditions.isDead && !playerAnimatingConditions.isLanding && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.LeftShift))
         {
             RegainGravity();
             oneForAllConditions.CannotUseOneForAll();

@@ -59,7 +59,9 @@ public class PlayerJump : MonoBehaviour
         playerAnimatingConditions.isRunning=false;
         physicalConditions.gravity -= physicalConditions.fallingAcceleration * Time.deltaTime;
         playerAnimatingConditions.cc.Move(Vector3.up * physicalConditions.gravity );
-        playerAnimatingConditions.IsIdleOrFloating();
-        if ( playerAnimatingConditions.cc.isGrounded ) {physicalConditions.gravity = 0;}
+        if(!playerAnimatingConditions.isLanding)
+            playerAnimatingConditions.IsIdleOrFloating();
+        if ( playerAnimatingConditions.cc.isGrounded ) 
+            physicalConditions.gravity = 0;
     }
 }

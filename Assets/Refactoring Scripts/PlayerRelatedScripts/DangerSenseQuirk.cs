@@ -38,8 +38,6 @@ public class DangerSenseQuirk : MonoBehaviour
         {
             dangerSense.SetActive(true);
             DangerSenseInnerVoice();
-            Dodging();
-            GravityApply();
         }
     }
     private bool DangerSenseQuirksState()
@@ -59,17 +57,6 @@ public class DangerSenseQuirk : MonoBehaviour
             quirksRateChange.dangerSenseRate = 0.175f;
         }
         return false;    
-    }
-    private void GravityApply()
-    {
-        cc.Move(DekusRealPosition.forward * Time.deltaTime);
-    }
-
-    private void Dodging()
-    {
-        cc.enabled = false;
-        DekusRealPosition.position = new Vector3(DekusRealPosition.localPosition.x, DekusRealPosition.localPosition.y + 2f, DekusRealPosition.localPosition.z + 1f);
-        cc.enabled = true;
     }
 
     private IEnumerator CheckForDronesRange()

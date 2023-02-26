@@ -10,14 +10,15 @@ public class DroneBullet : MonoBehaviour
     void Start() 
     {
         Destroy(gameObject,5f);
-        playerPos = GameObject.FindGameObjectWithTag("PlayerPosition").transform;
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         dir = playerPos.position - transform.position;
+        speed = playerPos.GetComponent<PlayerAnimatingConditions>().canDodgeWithDangerSense ? 1f : 7f;
     }
     void FixedUpdate()
     {
         if (playerPos != null)
         {
-            transform.Translate(dir * Time.deltaTime * speed, Space.World);
+            transform.Translate(dir * Time.fixedDeltaTime * speed, Space.World);
         }
     }
 
@@ -27,5 +28,10 @@ public class DroneBullet : MonoBehaviour
         {
             other.GetComponentInParent<PlayerStats>().GettingDamage(amountOfDamage);
         }
+    }
+
+    void OnDestroy() 
+    {
+
     }
 }

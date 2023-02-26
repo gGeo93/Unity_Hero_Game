@@ -13,6 +13,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
     public bool isKicking;
     public bool isFingering;
     public bool isAirFloating;
+    public bool isLanding;
     public bool isUsingBlackWhipForAttack;
     public bool isUsingBlackWhipForSwing;
     public bool isUsingFaJin;
@@ -30,7 +31,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
     
     public void IsIdleOrFloating()
     {
-        if((!Input.GetKey(KeyCode.W)) && !isDead)
+        if((!Input.GetKey(KeyCode.W) || isLanding) && !isDead)
         {
             if(cc.isGrounded)
             {
@@ -49,6 +50,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
                 isUsingFaJin = false;
                 
                 isAirFloating = false;
+                isLanding = false;
 
                 isFloating = false;
                 isIdle=true;
@@ -69,6 +71,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
 
                 isSweepFalling = false;
                 isAirFloating = false;
+                isLanding = false;
 
                 isIdle = false;
                 isFloating=true;

@@ -47,6 +47,10 @@ public class AnimationPlaying : MonoBehaviour
         {
             smokeQuirk.SmokeBeingReleased();
         }
+        if(playerAnimatingConditions.isLanding)
+        {
+            animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.Landing));
+        }
         if(playerAnimatingConditions.isTurningBehind)
         {
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.TurnBack));

@@ -8,6 +8,7 @@ public class MainController : MonoBehaviour
     AnimationPlaying animationPlaying;
     PlayerStats playerStats;
     PlayerMoving playerMoving;
+    LandingAfterJump landingAfterJump;
     BlackWhipSwinging swinging;
     PlayerJump playerJump;
     IdleOrFloatingCondition idleOrFloating;
@@ -32,6 +33,7 @@ public class MainController : MonoBehaviour
         animatorMainFunctionality = GetComponent<AnimatorMainFunctionality>();
         playerStats = GetComponent<PlayerStats>();
         playerMoving = GetComponent<PlayerMoving>();
+        landingAfterJump = GetComponent<LandingAfterJump>();
         swinging = GetComponent<BlackWhipSwinging>();
         playerJump = GetComponent<PlayerJump>();
         idleOrFloating = GetComponent<IdleOrFloatingCondition>();
@@ -70,6 +72,7 @@ public class MainController : MonoBehaviour
         playerJump.Jump();
         playerJump.Fall();
         playerJump.Falling();
+        landingAfterJump.Landing();
         airFloatQuirk.UsingFloatQuirk();
         oneForAllConditions.OneforallDifferentUses();
         playerMoving.Move();
