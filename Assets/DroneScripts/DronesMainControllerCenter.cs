@@ -21,7 +21,10 @@ public class DronesMainControllerCenter : MonoBehaviour
 
     void Start()
     {
+        int index = Random.Range(0,9);
+        Vector3 initDroneRndLocation = spawnPoints[index].position;
         initialDrone.GetComponent<DroneController>().SetUpDrone(this);
+        initialDrone.transform.position = initDroneRndLocation;
         activeDrones.Add(initialDrone);
         DroneLocation.enabled = true;
         numberOfEnemiesSpawned=0;
