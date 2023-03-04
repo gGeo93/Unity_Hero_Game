@@ -58,21 +58,14 @@ public class OneForAllConditions : MonoBehaviour
             else
                 quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fingersAttackSlider, 10);
         }
-        else if (Input.GetKey(KeyCode.R) && !playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isUsingFaJin && playerStats.MpImgBar.rectTransform.transform.localScale.x >= (1.0f - 0.1f) && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && !Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.R) && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && !Input.GetKey(KeyCode.W))
         {
-            if(playerStats.OFAImgBar.rectTransform.transform.localScale.x >= 100)
-            {
-                playerStats.OFAImgBar.rectTransform.transform.localScale = Vector3.one;
-                return;
-            }   
             playerAnimatingConditions.isPoweringUp = true;
-            physicalConditions.ZeroGravity();
-            playerStats.FixAllBars();
-            HpLoss();
         }
         else if(Input.GetKeyUp(KeyCode.R) && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind)
         {
-            playerStats.PoweringUpConsequences();
+            playerAnimatingConditions.isPoweringUp = false;
+            playerAnimatingConditions.canUseOneforAll = true;
         }
     }
 

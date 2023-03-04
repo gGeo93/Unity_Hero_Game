@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void PoweringUp()
     {
-        if(playerAnimatingConditions.isPoweringUp && !playerAnimatingConditions.canUseOneforAll)
+        if(playerAnimatingConditions.isPoweringUp)
         {
             powerUpPerCent.gameObject.SetActive(true);
             OFAImgBar.rectTransform.transform.localScale += new Vector3(0.25f, 0, 0) * Time.deltaTime;
