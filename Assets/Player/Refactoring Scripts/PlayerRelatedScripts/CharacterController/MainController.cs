@@ -68,6 +68,7 @@ public class MainController : MonoBehaviour
         dying.CaseOfDying();
         playerStats.HealingProcess();
         playerStats.FatigueLoss();
+        playerStats.PoweringUp();
         swinging.Swing();
         playerJump.Jump();
         playerJump.Fall();

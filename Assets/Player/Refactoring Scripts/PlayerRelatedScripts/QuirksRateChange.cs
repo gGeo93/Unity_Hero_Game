@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class QuirksRateChange : MonoBehaviour
 {
+    public int OFAmainRate = 5;
     //OFA Quirk Attacks Rates
     public int detroitSmashRate = 0;
     public int shootStyleRate = 0;
