@@ -77,12 +77,12 @@ public class AirFloatQuirk : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.F) && quirksRateChange.airFloatingRate < 0)
         {
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.airFloatSlider, ref quirksRateChange.airFloatingRate, 0.05f);
+            quirksRateChange.airFloatingRate = quirksSlidersFunctionality.QuirkEndurance(quirksSliders.airFloatSlider, quirksRateChange.airFloatingRate, 0.05f);
             return true;
         }
         else if(!Input.GetKey(KeyCode.F) && quirksRateChange.airFloatingRate > 0)
         {
-            quirksSlidersFunctionality.QuirkRefill(quirksSliders.airFloatSlider, ref quirksRateChange.airFloatingRate, -0.05f);
+            quirksRateChange.airFloatingRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.airFloatSlider, quirksRateChange.airFloatingRate, -0.05f);
             return false;
         }
         else if(Input.GetKeyUp(KeyCode.F))

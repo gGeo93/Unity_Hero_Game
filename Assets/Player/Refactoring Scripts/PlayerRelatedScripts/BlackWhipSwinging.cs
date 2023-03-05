@@ -24,25 +24,25 @@ public class BlackWhipSwinging : MonoBehaviour
     }
     public void Swing()
     {
-        if(quirksRateChange.blackWhipRate < 0 && Input.GetKey(KeyCode.B) && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isDead)
+        if(quirksRateChange.blackWhipRate <= 0f && Input.GetKey(KeyCode.B) && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isDead)
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = true;
             particleForces.BlackWhipApplied();
             quirksRateChange.blackWhipRate = -0.1f;
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, 0.2f);
+            quirksRateChange.blackWhipRate = quirksSlidersFunctionality.QuirkEndurance(quirksSliders.blackWhipSlider, quirksRateChange.blackWhipRate, 0.2f);
         }
         else if(!Input.GetKey(KeyCode.B))
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = false;
             particleForces.BlackWhipStopped();
             quirksRateChange.blackWhipRate = 0.1f;
-            quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, -0.1f);
+            quirksRateChange.blackWhipRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider, quirksRateChange.blackWhipRate, -0.1f);
         }
-        if(quirksRateChange.blackWhipRate > 0)
+        else if(quirksRateChange.blackWhipRate > 0)
         {
             playerAnimatingConditions.isUsingBlackWhipForSwing = false;
             quirksRateChange.blackWhipRate = 0.1f;
-            quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider,ref quirksRateChange.blackWhipRate, -0.1f);
+            quirksRateChange.blackWhipRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.blackWhipSlider, quirksRateChange.blackWhipRate, -0.1f);
         }
     }
 }

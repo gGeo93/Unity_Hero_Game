@@ -46,12 +46,12 @@ public class DangerSenseQuirk : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.D) && quirksRateChange.dangerSenseRate < 0)
         {
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.dangerSenseSlider, ref quirksRateChange.dangerSenseRate, 0.175f);
+            quirksRateChange.dangerSenseRate = quirksSlidersFunctionality.QuirkEndurance(quirksSliders.dangerSenseSlider, quirksRateChange.dangerSenseRate, 0.175f);
             return true;
         }
         else if(!Input.GetKey(KeyCode.D) && quirksRateChange.dangerSenseRate > 0)
         {
-            quirksSlidersFunctionality.QuirkRefill(quirksSliders.dangerSenseSlider, ref quirksRateChange.dangerSenseRate, -0.25f);
+            quirksRateChange.dangerSenseRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.dangerSenseSlider, quirksRateChange.dangerSenseRate, -0.25f);
             return false;
         }
         else if(Input.GetKeyUp(KeyCode.D))

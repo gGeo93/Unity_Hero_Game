@@ -34,7 +34,7 @@ public class FaJinQuirk : MonoBehaviour
         {
             playerAnimatingConditions.isUsingFaJin = true;
             //Fajin Bar goes in a certain rate from 1 to 0
-            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fajinSlider, ref quirksRateChange.faJinRate, fajinRechargeRate);
+            quirksRateChange.faJinRate = quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fajinSlider, quirksRateChange.faJinRate, fajinRechargeRate);
             //FaJin particles go to a loop
             StartCoroutine(FaJinParticlesApplied());
             //if Q,Z,X stores energy to a specific part of Deku's body
@@ -48,7 +48,7 @@ public class FaJinQuirk : MonoBehaviour
         {
             playerAnimatingConditions.isUsingFaJin = false;
             FaJinParticlesStop();
-            quirksSlidersFunctionality.QuirkRefill(quirksSliders.fajinSlider, ref quirksRateChange.faJinRate, fajinLossRate);
+            quirksRateChange.faJinRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.fajinSlider, quirksRateChange.faJinRate, fajinLossRate);
         }
         else if(Input.GetKeyUp(KeyCode.G))
         {

@@ -11,10 +11,12 @@ public class PlayerStats : MonoBehaviour
     private float healingFactor = 0.025f;
     private float fatigueLossRate = 0.005f;
     private float regainingStrengthRate = 0.1f;
+    private int perCent = 0;
     QuirksSliders quirksSliders;
     QuirksRateChange quirksRateChange;
     PlayerAnimatingConditions playerAnimatingConditions;
     ParticleForces particleForces;
+    PlayerStats playerStats;
     ElectricityScript electricityScript;
     AnimatorMainFunctionality animatorMainFunctionality;
     DyingCase dyingCase;
@@ -25,6 +27,7 @@ public class PlayerStats : MonoBehaviour
         electricityScript = GetComponent<ElectricityScript>();
         dyingCase = GetComponent<DyingCase>();
         particleForces = GetComponent<ParticleForces>();
+        playerStats = GetComponent<PlayerStats>();
         quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
         quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
     }
@@ -36,10 +39,15 @@ public class PlayerStats : MonoBehaviour
     {
         if(playerAnimatingConditions.isPoweringUp)
         {
-            powerUpPerCent.gameObject.SetActive(true);
-            OFAImgBar.rectTransform.transform.localScale += new Vector3(0.25f, 0, 0) * Time.deltaTime;
-            int perCent = Mathf.FloorToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
-            powerUpPerCent.text = perCent + "%";
+            if(perCent <= 100 && playerStats.MpImgBar.rectTransform.transform.localScale.x >= 0.10f)
+            {
+                powerUpPerCent.gameObject.SetActive(true);
+                playerAnimatingConditions.canUseOneforAll = true;
+                OFAImgBar.rectTransform.transform.localScale += new Vector3(0.25f, 0, 0) * Time.deltaTime;
+                perCent = Mathf.FloorToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
+                powerUpPerCent.text = perCent + "%";
+                PoweringUpConsequences();
+            }
         }
         else
         {
@@ -48,20 +56,27 @@ public class PlayerStats : MonoBehaviour
             FixAllBars();
         }
     }
-    public void PoweringUpConsequences()
+    private void PoweringUpConsequences()
     {
-        int perCent = Mathf.RoundToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);        
+        int perCent = Mathf.RoundToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
         playerAnimatingConditions.canUseOneforAll = true;
         //All OFA slider bars go up to 100 (+)
         OFAMaxSliderValue(perCent);
         //All OFA attacks +100 (+)
-        OFAPower(perCent);
-            //All Quirks' SlideBars rates go higher (+)
+        OFAPower();
+        //All Quirks' SlideBars rates go higher (+)
         OFAQuirksRatesRise();
-            //Mp bar(fatigue) loss rate go greatly higher (-)
+        //Mp bar(fatigue) loss rate go greatly higher (-)
         MpLossRateRise();
-            //Maybe and a part of Hp bar(helth) lowers (-)        
+        //Maybe and a part of Hp bar(helth) lowers (-)
+        HpFalling();
     }
+
+    private void HpFalling()
+    {
+        HpImgBar.rectTransform.transform.localScale -= Vector3.right * 0.1f * Time.deltaTime;
+    }
+
     public void GettingDamage(float amountOfDamage)
     {
         HpImgBar.rectTransform.localScale -= Vector3.right * amountOfDamage/100.0f;
@@ -73,7 +88,7 @@ public class PlayerStats : MonoBehaviour
     }
     private void OFABarLoss()
     {
-        OFAImgBar.rectTransform.localScale -= Vector3.right * 0.05f * Time.deltaTime;
+        OFAImgBar.rectTransform.localScale -= Vector3.right * 0.01f * Time.deltaTime;
     }
     public void HealingProcess()
     {
@@ -118,18 +133,19 @@ public class PlayerStats : MonoBehaviour
         quirksRateChange.fingerSmashRate += 1;
     }
 
-    private void OFAPower(int perCent)
+    private void OFAPower()
     {
-        particleForces.punchDamage += perCent;
-        particleForces.ShootStyleDamage += perCent;
-        particleForces.fingersDamage += perCent;
+        particleForces.punchDamage += 1;
+        particleForces.ShootStyleDamage += 1;
+        particleForces.fingersDamage += 1;
+        Debug.Log(particleForces.punchDamage);
     }
 
     private void OFAMaxSliderValue(int perCent)
     {
-        quirksSliders.handsAttackSlider.value = perCent;
-        quirksSliders.legAttackSlider.value = perCent;
-        quirksSliders.fingersAttackSlider.value = perCent;
+        quirksSliders.handsAttackSlider.value += perCent * Time.deltaTime;
+        quirksSliders.legAttackSlider.value += perCent * Time.deltaTime;
+        quirksSliders.fingersAttackSlider.value += perCent * Time.deltaTime;
     }
     private IEnumerator GettingTired()
     {

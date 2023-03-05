@@ -12,26 +12,29 @@ public class QuirksSlidersFunctionality : MonoBehaviour
     {
         quirksSliders = GetComponent<QuirksSliders>();
     }
-    public void QuirkEndurance(Slider quirkSlider,ref float reductionRythm, float rate)
+    public float QuirkEndurance(Slider quirkSlider, float reductionRythm, float rate)
     {
         quirkSlider.value += reductionRythm * Time.deltaTime;
         if(quirkSlider.value <= quirkSlider.minValue + 0.01f)
             reductionRythm = rate;
+        return reductionRythm;
     }
     public void QuirkEndurance(Slider quirkSlider, int lossOfEnergy)
     {
         quirkSlider.value -= lossOfEnergy;
     }
-    public void QuirkRefill(Slider quirkSlider,ref float fillingRythm, float rate)
+    public float QuirkRefill(Slider quirkSlider,float fillingRythm, float rate)
     {
         quirkSlider.value += fillingRythm * Time.deltaTime;
-        if(quirkSlider.value >= quirkSlider.maxValue - 0.01f)
+        if(quirkSlider.value >= quirkSlider.maxValue - 0.01f && !playerAnimatingConditions.canUseOneforAll)
             fillingRythm = rate;
+        return fillingRythm;
     }
-    public void QuirkRefill(Slider quirkSlider,ref int fillingRythm, int rate)
+    public int QuirkRefill(Slider quirkSlider, int fillingRythm, int rate)
     {
         quirkSlider.value += fillingRythm;
-        if(quirkSlider.value >= quirkSlider.maxValue - 0.01f)
+        if(quirkSlider.value >= quirkSlider.maxValue - 0.01f && !playerAnimatingConditions.canUseOneforAll)
             fillingRythm = rate;
+        return fillingRythm;
     }
 }

@@ -35,28 +35,19 @@ public class OneForAllConditions : MonoBehaviour
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isSmashing = true;
-            if(playerAnimatingConditions.canUseOneforAll)
-                quirksSliders.handsAttackSlider.value = playerStats.OFAImgBar.rectTransform.transform.localScale.x * 0.01f;
-            else
-                quirksSlidersFunctionality.QuirkEndurance(quirksSliders.handsAttackSlider, 20);
+            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.handsAttackSlider, 20);
         }
         else if (Input.GetKeyDown(KeyCode.Z) && quirksSliders.legAttackSlider.value > 0 && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && !playerAnimatingConditions.isTurningBehind)
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isKicking = true;
-            if(playerAnimatingConditions.canUseOneforAll)
-                quirksSliders.legAttackSlider.value = playerStats.OFAImgBar.rectTransform.transform.localScale.x * 0.01f;
-            else
-               quirksSlidersFunctionality.QuirkEndurance(quirksSliders.legAttackSlider, 15);
+            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.legAttackSlider, 15);
         }
         else if (Input.GetKeyDown(KeyCode.X) && quirksSliders.fingersAttackSlider.value > 0 && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.canGoShiftingSpeed && !playerAnimatingConditions.isTurningBehind)
         {
             physicalConditions.ZeroGravity();
             playerAnimatingConditions.isFingering = true;
-            if(playerAnimatingConditions.canUseOneforAll)
-                quirksSliders.fingersAttackSlider.value = playerStats.OFAImgBar.rectTransform.transform.localScale.x * 0.01f;
-            else
-                quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fingersAttackSlider, 10);
+            quirksSlidersFunctionality.QuirkEndurance(quirksSliders.fingersAttackSlider, 10);
         }
         else if (Input.GetKey(KeyCode.R) && !playerAnimatingConditions.isUsingFaJin && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.isTurningBehind && !Input.GetKey(KeyCode.W))
         {
@@ -92,19 +83,19 @@ public class OneForAllConditions : MonoBehaviour
         {
             if(Input.GetKey(KeyCode.Q))
             {
-                quirksSlidersFunctionality.QuirkRefill(quirksSliders.handsAttackSlider, ref quirksRateChange.detroitSmashRate, -1);
+                quirksRateChange.detroitSmashRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.handsAttackSlider, quirksRateChange.detroitSmashRate, -1);
                 particleForces.detroitSmashConcentration[0].enabled = true;
                 particleForces.detroitSmashConcentration[1].enabled = true;
             }
             else if(Input.GetKey(KeyCode.Z))
             {
                 particleForces.shootStyleConcentration.enabled = true;
-                quirksSlidersFunctionality.QuirkRefill(quirksSliders.legAttackSlider, ref quirksRateChange.shootStyleRate, -1);
+                quirksRateChange.shootStyleRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.legAttackSlider, quirksRateChange.shootStyleRate, -1);
             }
             else if(Input.GetKey(KeyCode.X))
             {
                 particleForces.fingerSmashConcentration.enabled = true;
-                quirksSlidersFunctionality.QuirkRefill(quirksSliders.fingersAttackSlider, ref quirksRateChange.fingerSmashRate, -1);
+                quirksRateChange.fingerSmashRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.fingersAttackSlider, quirksRateChange.fingerSmashRate, -1);
             }
         }
     }
