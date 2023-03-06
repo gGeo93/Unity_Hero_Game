@@ -24,7 +24,7 @@ public class PlayerJump : MonoBehaviour
     {
         if(!playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.B)))
         {         
-            if(playerAnimatingConditions.isPoweringUp || playerAnimatingConditions.isFingering || playerAnimatingConditions.isSmashing || playerAnimatingConditions.isKicking)
+            if(playerAnimatingConditions.isFingering || playerAnimatingConditions.isSmashing || playerAnimatingConditions.isKicking)
                 physicalConditions.RepairingGravity();
             if (Mathf.Abs(dekusRealTransform.position.y) <= physicalConditions.AirLimit)
             {

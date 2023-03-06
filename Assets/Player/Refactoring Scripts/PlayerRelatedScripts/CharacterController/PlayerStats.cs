@@ -9,7 +9,8 @@ public class PlayerStats : MonoBehaviour
     public RawImage OFAImgBar;
     [SerializeField] TextMeshProUGUI powerUpPerCent;
     private float healingFactor = 0.025f;
-    private float fatigueLossRate = 0.005f;
+    private float fatigueLossRate = 0.01f;
+    private float OFAbarLosssRate = 0.01f;
     private float regainingStrengthRate = 0.1f;
     private int perCent = 0;
     QuirksSliders quirksSliders;
@@ -88,7 +89,7 @@ public class PlayerStats : MonoBehaviour
     }
     private void OFABarLoss()
     {
-        OFAImgBar.rectTransform.localScale -= Vector3.right * 0.01f * Time.deltaTime;
+        OFAImgBar.rectTransform.localScale -= Vector3.right * OFAbarLosssRate * Time.deltaTime;
     }
     public void HealingProcess()
     {
@@ -138,7 +139,6 @@ public class PlayerStats : MonoBehaviour
         particleForces.punchDamage += 1;
         particleForces.ShootStyleDamage += 1;
         particleForces.fingersDamage += 1;
-        Debug.Log(particleForces.punchDamage);
     }
 
     private void OFAMaxSliderValue(int perCent)
@@ -155,7 +155,7 @@ public class PlayerStats : MonoBehaviour
             {
                 if(!PauseMenu.theGameIsPaused)
                 {
-                    MpImgBar.rectTransform.localScale -= Vector3.right * fatigueLossRate/100.0f;
+                    MpImgBar.rectTransform.localScale -= Vector3.right * fatigueLossRate / 100.0f;
                 }
                 yield return new WaitForSeconds(3.0f);
             }
