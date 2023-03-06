@@ -79,6 +79,8 @@ public class DroneAttacks : MonoBehaviour
     {
         while(true)
         {
+            yield return null;
+            if(!playerAnimatingConditions.canGoShiftingSpeed) continue;
             explosionIndicator.enabled = false;
             yield return new WaitForSeconds(15f);
             IsAboutToExplode = true;

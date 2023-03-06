@@ -25,7 +25,7 @@ public class ShiftingGearQuirk : MonoBehaviour
     }
     public void StartShiftingGear()
     {
-        if(playerAnimatingConditions.canUseOneforAll && !playerAnimatingConditions.isSmashing && !playerAnimatingConditions.isFingering && !playerAnimatingConditions.isKicking && Input.GetKeyDown(KeyCode.Return) && playerAnimatingConditions.canGoShiftingSpeed)
+        if(Input.GetKeyDown(KeyCode.Return) && !playerAnimatingConditions.isSmashing && !playerAnimatingConditions.isFingering && !playerAnimatingConditions.isKicking && playerAnimatingConditions.canGoShiftingSpeed)
         {
             if(playerStats.MpImgBar.rectTransform.transform.localScale.x >= 0.75f)
             {
@@ -41,7 +41,8 @@ public class ShiftingGearQuirk : MonoBehaviour
     IEnumerator ShiftingSpeed()
     {
         int shiftingTimes = 1;
-        float distanceFromDrone = 3f;
+        float distanceFromDrone = 3f;//3f before
+        float extraDistance = 50f;
         while(shiftingTimes <= 4)
         {
             if (Input.GetKeyDown(KeyCode.Space)) break;
@@ -51,7 +52,12 @@ public class ShiftingGearQuirk : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)) break;
             transmitionFog.SetActive(true);
             cc.enabled = false;
-            DroneController closestToHeroDrone = droneSpawner.activeDrones.OrderBy(d => (d.transform.position - dekus_RealPosition.position).magnitude).FirstOrDefault(d => (d.transform.position - dekus_RealPosition.position).magnitude <= droneSpawner.explosionRadius);
+            //extraDistance *= 15 * playerStats.MpImgBar.rectTransform.transform.localScale.x;
+            DroneController closestToHeroDrone = droneSpawner.activeDrones
+            .OrderBy(d => (d.transform.position - dekus_RealPosition.position).magnitude)
+            .FirstOrDefault(d => 
+            (d.transform.position - dekus_RealPosition.position).magnitude <= 
+            droneSpawner.explosionRadius + extraDistance);
             if (closestToHeroDrone != null)
             {
                 transform.position = new Vector3(closestToHeroDrone.transform.position.x, closestToHeroDrone.transform.position.y, closestToHeroDrone.transform.position.z - distanceFromDrone);
