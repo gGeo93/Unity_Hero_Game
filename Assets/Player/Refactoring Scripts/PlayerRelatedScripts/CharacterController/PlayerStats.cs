@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     private int perCent = 0;
     QuirksSliders quirksSliders;
     QuirksRateChange quirksRateChange;
+    OneForAllSoundEffects oneForAllSoundEffects;
     PlayerAnimatingConditions playerAnimatingConditions;
     ParticleForces particleForces;
     PlayerStats playerStats;
@@ -31,6 +32,7 @@ public class PlayerStats : MonoBehaviour
         playerStats = GetComponent<PlayerStats>();
         quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
         quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
+        oneForAllSoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
     }
     void Start() 
     {
@@ -40,9 +42,9 @@ public class PlayerStats : MonoBehaviour
     {
         if(playerAnimatingConditions.isPoweringUp)
         {
-            if(perCent <= 100 && playerStats.MpImgBar.rectTransform.transform.localScale.x >= 0.10f)
+            powerUpPerCent.gameObject.SetActive(true);
+            if(perCent <= 100 && playerStats.MpImgBar.rectTransform.transform.localScale.x >= 0.70f)
             {
-                powerUpPerCent.gameObject.SetActive(true);
                 playerAnimatingConditions.canUseOneforAll = true;
                 OFAImgBar.rectTransform.transform.localScale += new Vector3(0.25f, 0, 0) * Time.deltaTime;
                 perCent = Mathf.FloorToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
@@ -52,17 +54,18 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            powerUpPerCent.gameObject.SetActive(false);
+            powerUpPerCent.text = Mathf.FloorToInt(OFAImgBar.rectTransform.transform.localScale.x * 100) + "%";
+            perCent = Mathf.FloorToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
             OFABarLoss();
             FixAllBars();
         }
     }
     private void PoweringUpConsequences()
     {
-        int perCent = Mathf.RoundToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
+        //int perCent = Mathf.RoundToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
         playerAnimatingConditions.canUseOneforAll = true;
         //All OFA slider bars go up to 100 (+)
-        OFAMaxSliderValue(perCent);
+        OFAMaxSliderValue();
         //All OFA attacks +100 (+)
         OFAPower();
         //All Quirks' SlideBars rates go higher (+)
@@ -71,8 +74,10 @@ public class PlayerStats : MonoBehaviour
         MpLossRateRise();
         //Maybe and a part of Hp bar(helth) lowers (-)
         HpFalling();
+        //OFA 100%
+        OneHundredPerCent();
     }
-
+    
     private void HpFalling()
     {
         HpImgBar.rectTransform.transform.localScale -= Vector3.right * 0.1f * Time.deltaTime;
@@ -90,6 +95,7 @@ public class PlayerStats : MonoBehaviour
     private void OFABarLoss()
     {
         OFAImgBar.rectTransform.localScale -= Vector3.right * OFAbarLosssRate * Time.deltaTime;
+        perCent = Mathf.FloorToInt(OFAImgBar.rectTransform.localScale.x * 100);
     }
     public void HealingProcess()
     {
@@ -126,6 +132,13 @@ public class PlayerStats : MonoBehaviour
         SetFatigueLossRate(0.01f);
         SetRegainingStrengthRate(0.05f);
     }
+    private void OneHundredPerCent()
+    {
+        if (perCent == 100)
+        {
+            oneForAllSoundEffects.PlayAnimSound(15);
+        }
+    }
 
     private void OFAQuirksRatesRise()
     {
@@ -141,7 +154,7 @@ public class PlayerStats : MonoBehaviour
         particleForces.fingersDamage += 1;
     }
 
-    private void OFAMaxSliderValue(int perCent)
+    private void OFAMaxSliderValue()
     {
         quirksSliders.handsAttackSlider.value += perCent * Time.deltaTime;
         quirksSliders.legAttackSlider.value += perCent * Time.deltaTime;
@@ -155,7 +168,7 @@ public class PlayerStats : MonoBehaviour
             {
                 if(!PauseMenu.theGameIsPaused)
                 {
-                    MpImgBar.rectTransform.localScale -= Vector3.right * fatigueLossRate / 100.0f;
+                    MpImgBar.rectTransform.localScale -= Vector3.right * fatigueLossRate * Time.deltaTime;
                 }
                 yield return new WaitForSeconds(3.0f);
             }
