@@ -20,12 +20,10 @@ public class PlayerStats : MonoBehaviour
     ParticleForces particleForces;
     PlayerStats playerStats;
     ElectricityScript electricityScript;
-    AnimatorMainFunctionality animatorMainFunctionality;
     DyingCase dyingCase;
     void Awake() 
     {
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
-        animatorMainFunctionality = GetComponent<AnimatorMainFunctionality>();
         electricityScript = GetComponent<ElectricityScript>();
         dyingCase = GetComponent<DyingCase>();
         particleForces = GetComponent<ParticleForces>();
@@ -43,7 +41,7 @@ public class PlayerStats : MonoBehaviour
         if(playerAnimatingConditions.isPoweringUp)
         {
             powerUpPerCent.gameObject.SetActive(true);
-            if(perCent <= 100 && playerStats.MpImgBar.rectTransform.transform.localScale.x >= 0.70f)
+            if(perCent < 100 && playerStats.MpImgBar.rectTransform.transform.localScale.x >= 0.70f)
             {
                 playerAnimatingConditions.canUseOneforAll = true;
                 OFAImgBar.rectTransform.transform.localScale += new Vector3(0.25f, 0, 0) * Time.deltaTime;
@@ -62,7 +60,6 @@ public class PlayerStats : MonoBehaviour
     }
     private void PoweringUpConsequences()
     {
-        //int perCent = Mathf.RoundToInt(OFAImgBar.rectTransform.transform.localScale.x * 100);
         playerAnimatingConditions.canUseOneforAll = true;
         //All OFA slider bars go up to 100 (+)
         OFAMaxSliderValue();
@@ -142,9 +139,9 @@ public class PlayerStats : MonoBehaviour
 
     private void OFAQuirksRatesRise()
     {
-        quirksRateChange.detroitSmashRate += 1;
-        quirksRateChange.shootStyleRate += 1;
-        quirksRateChange.fingerSmashRate += 1;
+        quirksRateChange.detroitSmashRate -= 1;
+        quirksRateChange.shootStyleRate -= 1;
+        quirksRateChange.fingerSmashRate -= 1;
     }
 
     private void OFAPower()

@@ -29,15 +29,19 @@ public class QuirksSlidersFunctionality : MonoBehaviour
     public float QuirkRefill(Slider quirkSlider,float fillingRythm, float rate)
     {
         quirkSlider.value += fillingRythm * Time.deltaTime;
-        if(quirkSlider.value >= quirkSlider.maxValue - 0.01f)
+        if(quirkSlider.value == quirkSlider.maxValue)
             fillingRythm = rate;
+        else if(quirkSlider.value == quirkSlider.minValue)
+            fillingRythm = -rate;
         return fillingRythm;
     }
     public int QuirkRefill(Slider quirkSlider, int fillingRythm, int rate)
     {
         quirkSlider.value += fillingRythm;
-        if(quirkSlider.value >= quirkSlider.maxValue - 0.01f)
+        if(quirkSlider.value == quirkSlider.maxValue)
             fillingRythm = rate;
+        else if(quirkSlider.value == quirkSlider.minValue)
+            fillingRythm = -rate;
         return fillingRythm;
     }
 }

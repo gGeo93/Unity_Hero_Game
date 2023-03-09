@@ -28,6 +28,28 @@ public class FaJinQuirk : MonoBehaviour
             FajinQuirkState();
         }
     }
+    private void StoringEnergyToBodyParts()//enable false
+    {
+        if(playerAnimatingConditions.isUsingFaJin)
+        {
+            if(Input.GetKey(KeyCode.Q))
+            {
+                quirksRateChange.detroitSmashRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.handsAttackSlider, quirksRateChange.detroitSmashRate, -1);
+                fajinParticlesEffect.detroitSmashConcentration[0].enabled = true;
+                fajinParticlesEffect.detroitSmashConcentration[1].enabled = true;
+            }
+            else if(Input.GetKey(KeyCode.Z))
+            {
+                fajinParticlesEffect.shootStyleConcentration.enabled = true;
+                quirksRateChange.shootStyleRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.legAttackSlider, quirksRateChange.shootStyleRate, -1);
+            }
+            else if(Input.GetKey(KeyCode.X))
+            {
+                fajinParticlesEffect.fingerSmashConcentration.enabled = true;
+                quirksRateChange.fingerSmashRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.fingersAttackSlider, quirksRateChange.fingerSmashRate, -1);
+            }
+        }
+    }
     private void FajinQuirkState()
     {
         if (Input.GetKey(KeyCode.G) && quirksRateChange.faJinRate < 0)
@@ -39,7 +61,7 @@ public class FaJinQuirk : MonoBehaviour
             StartCoroutine(FaJinParticlesApplied());
             //if Q,Z,X stores energy to a specific part of Deku's body
             //3 oneforall bars begin to fill from 0 to 100
-            oneForAll.StoringEnergyToBodyParts();
+            StoringEnergyToBodyParts();
             //You can swip from storing energy from one part of the body to the other
             //When FaJin bar reaches zero the storing energy process is over and the bar begins to fill at a specific rate
             //The Q,Z,X bars start to lose their energy with a rate
@@ -47,13 +69,14 @@ public class FaJinQuirk : MonoBehaviour
         else if(!Input.GetKey(KeyCode.G) && quirksRateChange.faJinRate > 0)
         {
             playerAnimatingConditions.isUsingFaJin = false;
-            FaJinParticlesStop();
+            FaJinParticlesStop(fajinParticlesEffect.fingersParticles);
             quirksRateChange.faJinRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.fajinSlider, quirksRateChange.faJinRate, fajinLossRate);
         }
         else if(Input.GetKeyUp(KeyCode.G))
         {
             playerAnimatingConditions.isUsingFaJin = false;
             quirksRateChange.faJinRate = fajinRechargeRate;
+            StartCoroutine(AllFajinEffectsStop());
         }
     }
     private IEnumerator FaJinParticlesApplied()
@@ -66,8 +89,17 @@ public class FaJinQuirk : MonoBehaviour
             particlesMain.loop = true;
         }
     }
+    private IEnumerator AllFajinEffectsStop()
+    {
+        yield return new WaitForSeconds(20);
+        fajinParticlesEffect.detroitSmashConcentration[0].enabled = false;
+        fajinParticlesEffect.detroitSmashConcentration[1].enabled = false;
+        
+        fajinParticlesEffect.shootStyleConcentration.enabled = false;
 
-    private void FaJinParticlesStop()
+        fajinParticlesEffect.fingerSmashConcentration.enabled = false;
+    }
+    private void FaJinParticlesStop(ParticleSystem particleSystem)
     {
         fajinParticlesEffect.fingersParticles.Stop();
         var particlesMain = fajinParticlesEffect.FaJinParticles.main;

@@ -8,7 +8,6 @@ public class OneForAllConditions : MonoBehaviour
     IdleOrFloatingCondition idleOrFloatingCondition;
     PlayerStats playerStats;
     ParticleForces particleForces;
-    QuirksRateChange quirksRateChange;
     QuirksSliders quirksSliders;
     QuirksSlidersFunctionality quirksSlidersFunctionality;
     OneForAllSoundEffects oneForAllSoundEffects;
@@ -16,7 +15,6 @@ public class OneForAllConditions : MonoBehaviour
     void Awake() 
     {
         oneForAllSoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
-        quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
         quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
         quirksSlidersFunctionality = GameManager.Instance.UITransform.GetComponent<QuirksSlidersFunctionality>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
@@ -66,38 +64,11 @@ public class OneForAllConditions : MonoBehaviour
         particleForces.ShootStyleDamage = 30;
         particleForces.fingersDamage = 20;
     }
-    private void HpLoss()
-    {
-        float healthRemaining = playerStats.HpImgBar.rectTransform.localScale.x;
-        playerStats.HpImgBar.rectTransform.transform.localScale -= Vector3.right * 0.1f * Time.deltaTime;
-    }
 
     public void CannotUseOneForAll()
     {
         if (playerAnimatingConditions.isPoweringUp)
             playerAnimatingConditions.canUseOneforAll = false;
-    }
-    public void StoringEnergyToBodyParts()//enable false
-    {
-        if(playerAnimatingConditions.isUsingFaJin)
-        {
-            if(Input.GetKey(KeyCode.Q))
-            {
-                quirksRateChange.detroitSmashRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.handsAttackSlider, quirksRateChange.detroitSmashRate, -1);
-                particleForces.detroitSmashConcentration[0].enabled = true;
-                particleForces.detroitSmashConcentration[1].enabled = true;
-            }
-            else if(Input.GetKey(KeyCode.Z))
-            {
-                particleForces.shootStyleConcentration.enabled = true;
-                quirksRateChange.shootStyleRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.legAttackSlider, quirksRateChange.shootStyleRate, -1);
-            }
-            else if(Input.GetKey(KeyCode.X))
-            {
-                particleForces.fingerSmashConcentration.enabled = true;
-                quirksRateChange.fingerSmashRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.fingersAttackSlider, quirksRateChange.fingerSmashRate, -1);
-            }
-        }
     }
     public void OFAVoiceSoundEffect(int index)//Triggered By Animation Event
     {
