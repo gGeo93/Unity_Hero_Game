@@ -11,9 +11,11 @@ public class ShiftingGearQuirk : MonoBehaviour
     PlayerAnimatingConditions playerAnimatingConditions;
     PlayerStats playerStats;
     OneForAllSoundEffects oneForAllSoundEffects;
+    QuirksSliders quirksSliders;
     [SerializeField]DronesMainControllerCenter droneSpawner;
     [SerializeField] GameObject transmitionFog;
     [SerializeField] Transform dekus_RealPosition;
+    int attackPowerUp = 40;
     void Awake() 
     {
         oneForAllSoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
@@ -22,6 +24,7 @@ public class ShiftingGearQuirk : MonoBehaviour
         physicalConditions = GetComponent<PhysicalConditions>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         playerStats = GetComponent<PlayerStats>();
+        quirksSliders = GetComponent<QuirksSliders>();
     }
     public void StartShiftingGear()
     {
@@ -42,8 +45,9 @@ public class ShiftingGearQuirk : MonoBehaviour
     {
         int shiftingTimes = 1;
         float distanceFromDrone = 3f;//3f before
-        float extraDistance = 50f;
-        while(shiftingTimes <= 4)
+        //float extraDistance = 50f;
+        DroneController closestToHeroDrone;
+        while(shiftingTimes <= 8)
         {
             if (Input.GetKeyDown(KeyCode.Space)) break;
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.ShiftSpeed));
@@ -53,11 +57,11 @@ public class ShiftingGearQuirk : MonoBehaviour
             transmitionFog.SetActive(true);
             cc.enabled = false;
             //extraDistance *= 15 * playerStats.MpImgBar.rectTransform.transform.localScale.x;
-            DroneController closestToHeroDrone = droneSpawner.activeDrones
+            closestToHeroDrone = droneSpawner.activeDrones
             .OrderBy(d => (d.transform.position - dekus_RealPosition.position).magnitude)
-            .FirstOrDefault(d => 
+            .FirstOrDefault(/*d => 
             (d.transform.position - dekus_RealPosition.position).magnitude <= 
-            droneSpawner.explosionRadius + extraDistance);
+            droneSpawner.explosionRadius + extraDistance*/);
             if (closestToHeroDrone != null)
             {
                 transform.position = new Vector3(closestToHeroDrone.transform.position.x, closestToHeroDrone.transform.position.y, closestToHeroDrone.transform.position.z - distanceFromDrone);
@@ -68,6 +72,9 @@ public class ShiftingGearQuirk : MonoBehaviour
             if (closestToHeroDrone != null) OneForAllAttackChoice(shiftingTimes);
             else oneForAllSoundEffects.PlayAnimSound(13);
             yield return new WaitForSeconds(2.5f);
+            closestToHeroDrone = droneSpawner.activeDrones
+            .OrderBy(d => (d.transform.position - dekus_RealPosition.position).magnitude)
+            .FirstOrDefault();
             if (closestToHeroDrone == null) break;
             if (Input.GetKeyDown(KeyCode.Space)) break;
             shiftingTimes += 1;
@@ -86,9 +93,13 @@ public class ShiftingGearQuirk : MonoBehaviour
         switch(shiftingGearIndex)
         {
             case 1: playerAnimatingConditions.isFingering = true; playerAnimatingConditions.isSmashing = playerAnimatingConditions.isKicking = false; break;
-            case 2: playerAnimatingConditions.isKicking = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isSmashing = false; break;
-            case 3: playerAnimatingConditions.isSmashing = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; break;
-            case 4: playerAnimatingConditions.isSmashing = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; break;
+            case 2: playerAnimatingConditions.isFingering = true; playerAnimatingConditions.isSmashing = playerAnimatingConditions.isKicking = false; break;
+            case 3: playerAnimatingConditions.isKicking = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isSmashing = false; break;
+            case 4: playerAnimatingConditions.isKicking = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isSmashing = false; break;
+            case 5: playerAnimatingConditions.isSmashing = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; break;
+            case 6: playerAnimatingConditions.isSmashing = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; break;
+            case 7: playerAnimatingConditions.isSmashing = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; break;
+            case 8: playerAnimatingConditions.isSmashing = true; playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; break;
             default: Debug.Log("Something went wrong"); break;
         }
     }
@@ -98,10 +109,15 @@ public class ShiftingGearQuirk : MonoBehaviour
         switch(shiftingTimes)
         {
             case 1: oneForAllSoundEffects.PlayAnimSound(9); break;
-            case 2: oneForAllSoundEffects.PlayAnimSound(10); break;
-            case 3: oneForAllSoundEffects.PlayAnimSound(11); break;
-            case 4: oneForAllSoundEffects.PlayAnimSound(12); break;
+            case 3: oneForAllSoundEffects.PlayAnimSound(10); break;
+            case 5: oneForAllSoundEffects.PlayAnimSound(11); break;
+            case 8: oneForAllSoundEffects.PlayAnimSound(12); break;
             default: break;
         }
+    }
+
+    private void ShiftingGearStrength()
+    {
+        quirksSliders.handsAttackSlider.value += attackPowerUp;       
     }
 }
