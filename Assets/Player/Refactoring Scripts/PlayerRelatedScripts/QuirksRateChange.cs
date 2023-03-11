@@ -27,5 +27,6 @@ public class QuirksRateChange : MonoBehaviour
         airFloatingRate = -0.05f;
         smokeScreenRate = 0.05f;
         blackWhipRate = -0.1f;
+        shiftingGearRate = 0.025f;
     }
 }

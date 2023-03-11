@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class QuirksSlidersFunctionality : MonoBehaviour
 {
     QuirksSliders quirksSliders;
-    [SerializeField] PlayerAnimatingConditions playerAnimatingConditions;
-    [SerializeField] ParticleForces particleForces;
+   
     void Awake() 
     {
         quirksSliders = GetComponent<QuirksSliders>();

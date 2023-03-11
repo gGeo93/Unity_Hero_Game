@@ -4,10 +4,12 @@ using UnityEngine.UI;
 public class DyingCase : MonoBehaviour
 {
     PlayerAnimatingConditions playerAnimatingConditions;
+    PhysicalConditions physicalConditions;
     [SerializeField] Text DyingMessage;
     void Awake() 
     {
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
+        physicalConditions = GetComponent<PhysicalConditions>();
     }
     private void QuitGame() => Application.Quit();
     private void DyingMessageAndExit()
@@ -19,6 +21,9 @@ public class DyingCase : MonoBehaviour
     }
     private void DyingState()
     {
+        physicalConditions.RepairingGravity();
+        playerAnimatingConditions.canGoShiftingSpeed = true;
+        playerAnimatingConditions.canDodgeWithDangerSense = false;
         playerAnimatingConditions.canUseOneforAll = false;
         playerAnimatingConditions.isAirFloating = false;
         playerAnimatingConditions.isFloating = false;
