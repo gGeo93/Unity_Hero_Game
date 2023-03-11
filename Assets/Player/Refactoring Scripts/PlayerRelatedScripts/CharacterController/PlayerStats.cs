@@ -131,7 +131,7 @@ public class PlayerStats : MonoBehaviour
     }
     private void OneHundredPerCent()
     {
-        if (perCent == 100)
+        if (perCent >= 100)
         {
             oneForAllSoundEffects.PlayAnimSound(15);
         }

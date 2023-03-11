@@ -72,7 +72,7 @@ public class FaJinQuirk : MonoBehaviour
             FaJinParticlesStop(fajinParticlesEffect.fingersParticles);
             quirksRateChange.faJinRate = quirksSlidersFunctionality.QuirkRefill(quirksSliders.fajinSlider, quirksRateChange.faJinRate, fajinLossRate);
         }
-        else if(Input.GetKeyUp(KeyCode.G))
+        if(Input.GetKeyUp(KeyCode.G))
         {
             playerAnimatingConditions.isUsingFaJin = false;
             quirksRateChange.faJinRate = fajinRechargeRate;
