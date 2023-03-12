@@ -9,6 +9,7 @@ public class OneForAllConditions : MonoBehaviour
     PlayerStats playerStats;
     ParticleForces particleForces;
     QuirksSliders quirksSliders;
+    QuirksRateChange quirksRateChange;
     QuirksSlidersFunctionality quirksSlidersFunctionality;
     OneForAllSoundEffects oneForAllSoundEffects;
     
@@ -16,6 +17,7 @@ public class OneForAllConditions : MonoBehaviour
     {
         oneForAllSoundEffects = GameManager.Instance.AudioManipulator.GetComponent<OneForAllSoundEffects>();
         quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
+        quirksRateChange = GameManager.Instance.UITransform.GetComponent<QuirksRateChange>();
         quirksSlidersFunctionality = GameManager.Instance.UITransform.GetComponent<QuirksSlidersFunctionality>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         particleForces = GetComponent<ParticleForces>();

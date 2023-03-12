@@ -21,6 +21,7 @@ public class PlayerStats : MonoBehaviour
     PlayerStats playerStats;
     ElectricityScript electricityScript;
     DyingCase dyingCase;
+    bool quirksRateChangeAreRising = true;
     void Awake() 
     {
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
@@ -75,11 +76,6 @@ public class PlayerStats : MonoBehaviour
         OneHundredPerCent();
     }
     
-    private void HpFalling()
-    {
-        HpImgBar.rectTransform.transform.localScale -= Vector3.right * 0.1f * Time.deltaTime;
-    }
-
     public void GettingDamage(float amountOfDamage)
     {
         HpImgBar.rectTransform.localScale -= Vector3.right * amountOfDamage/100.0f;
@@ -89,6 +85,11 @@ public class PlayerStats : MonoBehaviour
             dyingCase.MainCaseOfDying();
         }
     }
+    private void HpFalling()
+    {
+        HpImgBar.rectTransform.transform.localScale -= Vector3.right * 0.1f * Time.deltaTime;
+    }
+
     private void OFABarLoss()
     {
         OFAImgBar.rectTransform.localScale -= Vector3.right * OFAbarLosssRate * Time.deltaTime;
@@ -136,12 +137,16 @@ public class PlayerStats : MonoBehaviour
             oneForAllSoundEffects.PlayAnimSound(15);
         }
     }
-
     private void OFAQuirksRatesRise()
     {
-        quirksRateChange.detroitSmashRate -= 1;
-        quirksRateChange.shootStyleRate -= 1;
-        quirksRateChange.fingerSmashRate -= 1;
+        if(quirksRateChangeAreRising)
+        {
+            quirksRateChangeAreRising = false;
+            
+            quirksRateChange.detroitSmashRate += 1;
+            quirksRateChange.shootStyleRate += 1;
+            quirksRateChange.fingerSmashRate += 1;
+        }
     }
 
     private void OFAPower()

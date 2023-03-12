@@ -42,7 +42,7 @@ public class ShiftingGearQuirk : MonoBehaviour
                 oneForAllSoundEffects.PlayAnimSound(14);
             }
         }
-        else if(Input.GetKeyDown(KeyCode.E))
+        else if(Input.GetKeyDown(KeyCode.E) && !playerAnimatingConditions.canGoShiftingSpeed)
         {
             StopAllCoroutines();
 

@@ -8,7 +8,7 @@ public class DroneAttacks : MonoBehaviour
 
     [SerializeField]float fireRange;
     [SerializeField] GameObject bullet;
-    [SerializeField] ParticleSystem droneExplosion;
+    public ParticleSystem droneExplosion;
     SphereCollider attackRange;
 
     float explosionRadius;
@@ -16,7 +16,7 @@ public class DroneAttacks : MonoBehaviour
     public bool IsAboutToExplode { get; private set; }
     [SerializeField] MeshRenderer explosionIndicator;
     bool canDodge;
-    private OneForAllSoundEffects enemySoundEffects;
+    public OneForAllSoundEffects enemySoundEffects;
     private PlayerStats playerStats;
     private PlayerAnimatingConditions playerAnimatingConditions;
     private SweepFall sweepFall;

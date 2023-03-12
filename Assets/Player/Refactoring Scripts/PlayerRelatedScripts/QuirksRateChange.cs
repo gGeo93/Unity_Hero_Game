@@ -18,9 +18,9 @@ public class QuirksRateChange : MonoBehaviour
 
     void Start() 
     {
-        detroitSmashRate = -2;
-        shootStyleRate = -2;
-        fingerSmashRate = -2;
+        detroitSmashRate = 1;
+        shootStyleRate = 1;
+        fingerSmashRate = 1;
 
         faJinRate = -0.25f;
         dangerSenseRate = -0.25f;

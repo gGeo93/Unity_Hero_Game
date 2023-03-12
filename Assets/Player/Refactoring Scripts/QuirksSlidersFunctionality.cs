@@ -34,13 +34,9 @@ public class QuirksSlidersFunctionality : MonoBehaviour
             fillingRythm = -rate;
         return fillingRythm;
     }
-    public int QuirkRefill(Slider quirkSlider, int fillingRythm, int rate)
+    public int QuirkRefill(Slider quirkSlider, int rate)
     {
-        quirkSlider.value += fillingRythm;
-        if(quirkSlider.value == quirkSlider.maxValue)
-            fillingRythm = rate;
-        else if(quirkSlider.value == quirkSlider.minValue)
-            fillingRythm = -rate;
-        return fillingRythm;
+        quirkSlider.value += rate;
+        return rate;
     }
 }

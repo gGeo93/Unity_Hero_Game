@@ -8,40 +8,62 @@ public class DroneHealthLoss : MonoBehaviour
     public Image droneImg;
     public Text droneImgText;
     [SerializeField] MeshRenderer blackSphereRenderer;
-    
-    private Transform DekuPosition;
+    DroneAttacks droneAttacks;
+    bool droneIsExplodingBeforeDestroyed = false;
     float t = 0.0f;
-    private void Awake() {
-        DekuPosition = GameObject.FindGameObjectWithTag("PlayerPosition").GetComponent<Transform>();
-    }
+    MeshFilter meshFilter;
     
-    private void Update() {
+    void OnEnable() 
+    {
+        droneAttacks = GetComponent<DroneAttacks>();
+        meshFilter = GetComponent<MeshFilter>();
+    }
+    void Update() 
+    {
         if (int.Parse(droneImgText.text) <= 0 )
         {
-            Destroy(gameObject);
+            if(!droneIsExplodingBeforeDestroyed)
+            {
+                droneIsExplodingBeforeDestroyed = true;
+                droneAttacks.droneExplosion.Play();
+                droneAttacks.enemySoundEffects.PlayEnemySound(0);
+                meshFilter.mesh = null;
+                droneImg.enabled = false;
+                droneImgText.enabled = false;
+                Destroy(gameObject,1f);
+            }
         }
     }
     private void OnCollisionEnter(Collision other) 
     {
+        FaJinQuirk faJinQuirk = other.collider.GetComponentInParent<FaJinQuirk>();
+        if(faJinQuirk != null)
+        {
+            faJinQuirk.FajinEnergyRelease(this, other.collider.name);
+        }
         ParticleForces particleForces = other.gameObject.GetComponentInParent<ParticleForces>();
         if(other.collider.name == "Finger_PS")
         {
             droneImg.rectTransform.localScale -= Vector3.right * (particleForces.fingersDamage /150f);
             droneImgText.text = (int.Parse(droneImgText.text)-particleForces.fingersDamage).ToString();
+            return;
         }
         else if (other.collider.name == "Kick_PS")
         {    
             droneImg.rectTransform.localScale -= Vector3.right * (particleForces.ShootStyleDamage/150f);
             droneImgText.text = (int.Parse(droneImgText.text)-particleForces.ShootStyleDamage).ToString();
+            return;
         }
         else if (other.collider.name == "Punch_PS")
         {
             droneImg.rectTransform.localScale -= Vector3.right * (particleForces.punchDamage/150f);
             droneImgText.text = (int.Parse(droneImgText.text)-particleForces.punchDamage).ToString();
+            return;
         }
         else if(other.collider.name == "Left_BlackWhip_Collider" || other.collider.name == "Right_BlackWhip_Collider")
         {
             StartCoroutine(BlackWhipApplied());
+            return;
         }    
     }
     IEnumerator BlackWhipApplied()
