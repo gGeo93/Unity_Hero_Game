@@ -46,12 +46,12 @@ public class TimeController : MonoBehaviour
     private float maxMoonLightIntensity;
     [SerializeField]
     private Material[] skyboxesMats;
+    [SerializeField]
+    private ParticleSystem rainFall;
     private DateTime currentTime;
-
     private TimeSpan sunriseTime;
     private TimeSpan eveningTime;
     private TimeSpan afternoonTime;
-
     private TimeSpan sunsetTime;
 
     void OnEnable() => Events.onSunsetArrival += delegate {return IsNight;};
@@ -60,6 +60,7 @@ public class TimeController : MonoBehaviour
     
     void Start()
     {
+        rainFall.Stop();
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         afternoonTime = TimeSpan.FromHours(afternoonHour);
@@ -135,6 +136,7 @@ public class TimeController : MonoBehaviour
     {
         if(currentTime.TimeOfDay >= sunriseTime && currentTime.TimeOfDay < afternoonTime)
         {
+            rainFall.Stop();
             RenderSettings.skybox = skyboxesMats[0];
             Events.onSkyboxHeightChanged.Invoke(0);
         }
@@ -152,6 +154,7 @@ public class TimeController : MonoBehaviour
         {
             RenderSettings.skybox = skyboxesMats[3];
             Events.onSkyboxHeightChanged.Invoke(0);
+            rainFall.Play();
         }
     }
 }
