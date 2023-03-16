@@ -21,20 +21,24 @@ public class SmokeQuirk : MonoBehaviour
     }
     public void SmokeQuirkActivative()
     {
-        if (quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && !playerAnimatingConditions.cannotEmmitSmoke && Input.GetKeyDown(KeyCode.S))
+        if (quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && Input.GetKeyDown(KeyCode.S))
         {
             quirksSliders.smokeSlider.value = 0f;
+            playerAnimatingConditions.canEmmitSmoke = true;
+            
             playerAnimatingConditions.isUsingSmokeQuirk = true;
-            playerAnimatingConditions.cannotEmmitSmoke = true;
             soundEffects.PlayAnimSound(6);
+            StartCoroutine(SmokeBeingReleased());
             StartCoroutine(CanReEmmitSmoke());
             StartCoroutine(SmokeQuirkDuration());
         }
         playerLocation.SightUnClear(!playerAnimatingConditions.isUsingSmokeQuirk);
     }
-    public void SmokeBeingReleased()
+    IEnumerator SmokeBeingReleased()
     {
+        yield return new WaitForSeconds(1.5f);
         smokeQuirk.Play();
+        playerAnimatingConditions.canEmmitSmoke = false;
     }
     IEnumerator CanReEmmitSmoke()
     {
@@ -44,7 +48,8 @@ public class SmokeQuirk : MonoBehaviour
             yield return null;
             if(quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue)
             {
-                playerAnimatingConditions.cannotEmmitSmoke = false;
+                playerAnimatingConditions.canEmmitSmoke = true;
+                Debug.Log(playerAnimatingConditions.canEmmitSmoke);
                 break;
             }
         }

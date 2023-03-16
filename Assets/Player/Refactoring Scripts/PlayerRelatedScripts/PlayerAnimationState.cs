@@ -7,13 +7,14 @@ public enum PlayerAnimationState
     Floating = 5,
     Landing = 6,  
     Flying = 7,
-    Smash = 8, 
-    ShootStyle = 9, 
-    FingerAttack = 10, 
-    PowerUp = 11,
-    Fa_Jin = 12,
-    ShiftSpeed = 13,
-    TurnBack = 14,
-    SweepFall = 15,
-    Dying = 16
+    SmokeRelease = 8,
+    Smash = 9, 
+    ShootStyle = 10, 
+    FingerAttack = 11, 
+    PowerUp = 12,
+    Fa_Jin = 13,
+    ShiftSpeed = 14,
+    TurnBack = 15,
+    SweepFall = 16,
+    Dying = 17
 }

@@ -17,13 +17,14 @@ public class PlayerAnimatingConditions : MonoBehaviour
     public bool isUsingBlackWhipForAttack;
     public bool isUsingBlackWhipForSwing;
     public bool isUsingFaJin;
-    public bool cannotEmmitSmoke;
+    public bool canEmmitSmoke = true;
     public bool isUsingSmokeQuirk;
     public bool isDead;
     public bool isSweepFalling;
     public bool isTurningBehind;
     public bool canDodgeWithDangerSense;
     public bool canGoShiftingSpeed = true;
+    public bool SBtnPressed() => Input.GetKeyDown(KeyCode.S);
 
     private void Awake() {
         cc = GetComponent<CharacterController>();
@@ -51,7 +52,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
                 
                 isAirFloating = false;
                 isLanding = false;
-
+                
                 isFloating = false;
                 isIdle=true;
             }
@@ -72,7 +73,7 @@ public class PlayerAnimatingConditions : MonoBehaviour
                 isSweepFalling = false;
                 isAirFloating = false;
                 isLanding = false;
-
+                
                 isIdle = false;
                 isFloating=true;
             }

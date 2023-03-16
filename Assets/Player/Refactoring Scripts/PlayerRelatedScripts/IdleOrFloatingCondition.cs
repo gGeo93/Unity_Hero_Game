@@ -15,6 +15,7 @@ public class IdleOrFloatingCondition : MonoBehaviour
             && !Input.GetKey(KeyCode.Space)
             && !Input.GetKey(KeyCode.F)
             && !playerAnimatingConditions.isLanding
+            && !playerAnimatingConditions.canEmmitSmoke
             && !playerAnimatingConditions.isUsingFaJin
             && !playerAnimatingConditions.isSweepFalling
             && !playerAnimatingConditions.isDead

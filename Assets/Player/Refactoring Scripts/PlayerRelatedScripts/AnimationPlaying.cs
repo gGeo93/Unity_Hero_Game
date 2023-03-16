@@ -43,9 +43,9 @@ public class AnimationPlaying : MonoBehaviour
             animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.Flying));
             playerAnimatingConditions.isAirFloating = false;
         }
-        if (playerAnimatingConditions.isUsingSmokeQuirk)
+        if (playerAnimatingConditions.SBtnPressed() && playerAnimatingConditions.canEmmitSmoke)
         {
-            smokeQuirk.SmokeBeingReleased();
+            animatorMainFunctionality.AnimationState(nameof(PlayerAnimationState.SmokeRelease));
         }
         if(playerAnimatingConditions.isLanding)
         {
