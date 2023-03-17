@@ -26,7 +26,8 @@ public class PlayerAnimatingConditions : MonoBehaviour
     public bool canGoShiftingSpeed = true;
     public bool SBtnPressed() => Input.GetKeyDown(KeyCode.S);
 
-    private void Awake() {
+    void Awake() 
+    {
         cc = GetComponent<CharacterController>();
     }
     
