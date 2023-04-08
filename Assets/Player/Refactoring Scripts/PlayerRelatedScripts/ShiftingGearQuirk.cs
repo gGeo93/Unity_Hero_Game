@@ -9,6 +9,7 @@ public class ShiftingGearQuirk : MonoBehaviour
     PhysicalConditions physicalConditions;
     PlayerAnimatingConditions playerAnimatingConditions;
     PlayerStats playerStats;
+    ParticleForces particleForces;
     OneForAllSoundEffects oneForAllSoundEffects;
     QuirksSliders quirksSliders;
     QuirksRateChange quirksRateChange;
@@ -22,6 +23,7 @@ public class ShiftingGearQuirk : MonoBehaviour
         cc = GetComponent<CharacterController>();
         animatorMainFunctionality = GetComponent<AnimatorMainFunctionality>();
         physicalConditions = GetComponent<PhysicalConditions>();
+        particleForces = GetComponent<ParticleForces>();
         playerAnimatingConditions = GetComponent<PlayerAnimatingConditions>();
         playerStats = GetComponent<PlayerStats>();
         quirksSliders = GameManager.Instance.UITransform.GetComponent<QuirksSliders>();
@@ -52,7 +54,7 @@ public class ShiftingGearQuirk : MonoBehaviour
         }
         else if(playerAnimatingConditions.canGoShiftingSpeed)
         {
-            quirksSlidersFunctionality.QuirkRefill(quirksSliders.shiftingGearsSlider, 0.025f, quirksRateChange.shiftingGearRate);
+            quirksSlidersFunctionality.QuirkRefill(quirksSliders.shiftingGearsSlider, 0.0175f, quirksRateChange.shiftingGearRate);
         }
     }
 
@@ -80,7 +82,7 @@ public class ShiftingGearQuirk : MonoBehaviour
             cc.enabled = true;
 
             if (closestToHeroDrone != null)
-                OneForAllAttackChoice(shiftingTimes);
+                OneForAllAttackChoice(ref shiftingTimes);
             else
                 oneForAllSoundEffects.PlayAnimSound(13);
 
@@ -128,51 +130,77 @@ public class ShiftingGearQuirk : MonoBehaviour
         playerStats.MpImgBar.rectTransform.transform.localScale = new Vector3(0, 1, 1);
         playerAnimatingConditions.isPoweringUp = false;
     }
-    private void OneForAllAttackChoice(int shiftingGearIndex)
+    private void OneForAllAttackChoice(ref int shiftingGearIndex)
     {
         switch(shiftingGearIndex)
         {
-            case 1: playerAnimatingConditions.isFingering = true; 
+            case 1:
+                    if(quirksSliders.fingersAttackSlider.value - particleForces.fingersDamage <= 0)
+                    {
+                        shiftingGearIndex = 3;
+                        break;
+                    }    
+                    playerAnimatingConditions.isFingering = true; 
                     playerAnimatingConditions.isSmashing = playerAnimatingConditions.isKicking = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.120f;
                     break;
-            case 2: playerAnimatingConditions.isFingering = true; 
+            case 2: if(quirksSliders.fingersAttackSlider.value - particleForces.fingersDamage <= 0)
+                        break;
+                    playerAnimatingConditions.isFingering = true; 
                     playerAnimatingConditions.isSmashing = playerAnimatingConditions.isKicking = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
-            case 3: playerAnimatingConditions.isKicking = true; 
+            case 3: if(quirksSliders.legAttackSlider.value - particleForces.ShootStyleDamage <= 0)
+                    {
+                        shiftingGearIndex = 5;
+                        break;
+                    }    
+                    playerAnimatingConditions.isKicking = true; 
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isSmashing = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
-            case 4: playerAnimatingConditions.isKicking = true; 
+            case 4: if(quirksSliders.legAttackSlider.value - particleForces.ShootStyleDamage <= 0)
+                        break;    
+                    playerAnimatingConditions.isKicking = true; 
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isSmashing = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
-            case 5: playerAnimatingConditions.isSmashing = true; 
+            case 5: if(quirksSliders.handsAttackSlider.value - particleForces.punchDamage <= 0)
+                    {
+                        shiftingGearIndex = 9;   
+                        break;
+                    }
+                    playerAnimatingConditions.isSmashing = true; 
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
-            case 6: playerAnimatingConditions.isSmashing = true; 
+            case 6: if(quirksSliders.handsAttackSlider.value - particleForces.punchDamage <= 0)
+                        break;
+                    playerAnimatingConditions.isSmashing = true; 
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false;
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
-            case 7: playerAnimatingConditions.isSmashing = true; 
+            case 7: if(quirksSliders.handsAttackSlider.value - particleForces.punchDamage <= 0)
+                        break;
+                    playerAnimatingConditions.isSmashing = true; 
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
-            case 8: playerAnimatingConditions.isSmashing = true; 
+            case 8: if(quirksSliders.handsAttackSlider.value - particleForces.punchDamage <= 0)
+                        break; 
+                    playerAnimatingConditions.isSmashing = true; 
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
-            default: Debug.Log("Something went wrong"); break;
+            default: shiftingGearIndex = 9; Debug.Log("Not enough resources"); break;
         }
     }
 

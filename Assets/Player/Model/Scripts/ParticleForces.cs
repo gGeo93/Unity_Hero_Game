@@ -11,7 +11,6 @@ public class ParticleForces : MonoBehaviour
         DetroitSmash = 0, ShootStyle = 1, FingerSmash = 2
     }
     public float radius;
-    public float explosivePower;
     public ParticleSystem FaJinParticles;
     public ParticleSystem punchParticles;
     public ParticleSystem explosiveParticles;

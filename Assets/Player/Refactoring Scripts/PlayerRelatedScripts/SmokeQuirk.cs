@@ -21,7 +21,7 @@ public class SmokeQuirk : MonoBehaviour
     }
     public void SmokeQuirkActivative()
     {
-        if (quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && Input.GetKeyDown(KeyCode.S))
+        if (quirksSliders.smokeSlider.value == quirksSliders.smokeSlider.maxValue && !playerAnimatingConditions.isDead && !playerAnimatingConditions.isSweepFalling && playerAnimatingConditions.SBtnPressed())
         {
             quirksSliders.smokeSlider.value = 0f;
             playerAnimatingConditions.canEmmitSmoke = true;
