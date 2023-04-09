@@ -711,7 +711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 810713049}
   m_Layer: 5
-  m_Name: HowToPLayContent
+  m_Name: How To Play Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1788,17 +1788,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: W is for walking,Shift+W is for running,Space is for
-            BlackWhip-floating, R is for PowerUp. After PowerUp Q,Z,X are 3 different
-            Attacks you can use. You can also use AirFloating by pressing F prolonged.
-            While using AirFloating quirk, a Black-Whip Attack can also  be activated
-            by pressing B. You can also use the new quirks Deku has mastered. When
-            you are in a certain drone-range which is about to trigger an explosion
-            DangerSense is being activated. You can hide yourself by using the smoke
-            quirk and make drones lose sight of your location. After Powering Up
-            you can use the powerful Fa Jin quirk which concentrates deku's strength
-            onto arms, leg or fingers for x2 damage in the randomly chosen attack.
+            Jumping, R is for PowerUp. After PowerUp Q,Z,X are 3 different Attacks
+            you can use. You can also use AirFloating by pressing F prolonged. Black-Whip
+            can be used to make you swing by pressing B prolonging. You can also
+            use it while you are flying, for an attack by pressing B. You can also
+            use the new quirks Deku has mastered. When you are in a certain drone-range
+            which is about to trigger an explosion DangerSense is being activated.
+            You can hide yourself by using the smoke quirk and make drones lose sight
+            of your location. After Powering Up you can use the powerful Fa Jin quirk
+            which concentrates deku's strength onto arms, leg or fingers for x2 damage.
             2nd's user shifting-speed has been added and you can activate this quirk
-            by pressing ENTER when you re in certain distance from an enemy.
+            by pressing ENTER. Remember you should use this quirk ONLY as a last
+            resort.
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &1879529451
@@ -1909,17 +1910,17 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: W is for walking,Shift+W is for running,Space is for BlackWhip-floating,
-    R is for PowerUp. After PowerUp Q,Z,X are 3 different Attacks you can use. You
-    can also use AirFloating by pressing F prolonged. While using AirFloating quirk,
-    a Black-Whip Attack can also  be activated by pressing B. You can also use the
-    new quirks Deku has mastered. When you are in a certain drone-range which is
-    about to trigger an explosion DangerSense is being activated. You can hide yourself
-    by using the smoke quirk and make drones lose sight of your location. After Powering
-    Up you can use the powerful Fa Jin quirk which concentrates deku's strength onto
-    arms, leg or fingers for x2 damage in the randomly chosen attack. 2nd's user
-    shifting-speed has been added and you can activate this quirk by pressing ENTER
-    when you re in certain distance from an enemy.
+  m_Text: W is for walking,Shift+W is for running,Space is for Jumping, R is for
+    PowerUp. After PowerUp Q,Z,X are 3 different Attacks you can use. You can also
+    use AirFloating by pressing F prolonged. Black-Whip can be used to make you swing
+    by pressing B prolonging. You can also use it while you are flying, for an attack
+    by pressing B. You can also use the new quirks Deku has mastered. When you are
+    in a certain drone-range which is about to trigger an explosion DangerSense is
+    being activated. You can hide yourself by using the smoke quirk and make drones
+    lose sight of your location. After Powering Up you can use the powerful Fa Jin
+    quirk which concentrates deku's strength onto arms, leg or fingers for x2 damage.
+    2nd's user shifting-speed has been added and you can activate this quirk by pressing
+    ENTER. Remember you should use this quirk ONLY as a last resort.
 --- !u!222 &1904760968
 CanvasRenderer:
   m_ObjectHideFlags: 0

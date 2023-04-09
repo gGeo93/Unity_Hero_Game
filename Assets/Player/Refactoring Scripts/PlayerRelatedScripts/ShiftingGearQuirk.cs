@@ -69,7 +69,7 @@ public class ShiftingGearQuirk : MonoBehaviour
 
             ShiftingGearVoice(shiftingTimes);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
 
             transmitionFog.SetActive(true);
             
@@ -86,7 +86,7 @@ public class ShiftingGearQuirk : MonoBehaviour
             else
                 oneForAllSoundEffects.PlayAnimSound(13);
 
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(1.5f);
 
             closestToHeroDrone = ClosestEnemy();
 
@@ -151,6 +151,7 @@ public class ShiftingGearQuirk : MonoBehaviour
                     playerAnimatingConditions.isSmashing = playerAnimatingConditions.isKicking = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
+                    quirksSliders.fingersAttackSlider.value -= 10;
                     break;
             case 3: if(quirksSliders.legAttackSlider.value - particleForces.ShootStyleDamage <= 0)
                     {
@@ -168,6 +169,7 @@ public class ShiftingGearQuirk : MonoBehaviour
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isSmashing = false; 
                     playerStats.GettingDamage(10);
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
+                    quirksSliders.legAttackSlider.value -= 20;
                     break;
             case 5: if(quirksSliders.handsAttackSlider.value - particleForces.punchDamage <= 0)
                     {
@@ -184,6 +186,7 @@ public class ShiftingGearQuirk : MonoBehaviour
                     playerAnimatingConditions.isSmashing = true; 
                     playerAnimatingConditions.isFingering = playerAnimatingConditions.isKicking = false;
                     playerStats.GettingDamage(10);
+                    quirksSliders.legAttackSlider.value -= 30;
                     quirksSliders.shiftingGearsSlider.value -= 0.125f;
                     break;
             case 7: if(quirksSliders.handsAttackSlider.value - particleForces.punchDamage <= 0)
