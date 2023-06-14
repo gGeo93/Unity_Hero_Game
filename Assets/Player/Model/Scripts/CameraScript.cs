@@ -27,9 +27,9 @@ public class CameraScript : MonoBehaviour
             if(!Input.GetKeyDown(KeyCode.S))
             {
                 float horizontal = Input.GetAxis("Mouse X") * rotateSpeed;
-                target.Rotate(0, horizontal, 0);
+                target.Rotate(0, horizontal * Time.fixedDeltaTime * 50f, 0);
                 float vertical = Input.GetAxis("Mouse Y") * rotateSpeed;
-                pivot.Rotate(-vertical, 0, 0);
+                pivot.Rotate(-vertical * Time.fixedDeltaTime * 50f, 0, 0);
 
                 float desiredYAngle = target.eulerAngles.y;
                 float desiredXAngle = pivot.eulerAngles.x;
